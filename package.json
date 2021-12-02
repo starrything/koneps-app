@@ -1,0 +1,75 @@
+{
+  "name": "visual-front",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@popperjs/core": "^2.9.2",
+    "@reduxjs/toolkit": "^1.6.1",
+    "@testing-library/jest-dom": "^5.12.0",
+    "@testing-library/react": "^11.2.7",
+    "@testing-library/user-event": "^12.8.3",
+    "ag-grid-community": "^26.1.0",
+    "ag-grid-enterprise": "^26.1.0",
+    "ag-grid-react": "^26.1.0",
+    "axios": "^0.21.1",
+    "bootstrap": "^5.0.1",
+    "bootstrap-icons": "^1.5.0",
+    "customize-cra": "^1.0.0",
+    "d3-format": "^1.4.5",
+    "jquery": "^3.6.0",
+    "lodash": "^4.17.21",
+    "node-sass": "^6.0.0",
+    "plotly.js": "^2.3.0",
+    "popper.js": "^1.16.1",
+    "react": "^17.0.2",
+    "react-app-polyfill": "^2.0.0",
+    "react-app-rewired": "^2.1.8",
+    "react-bootstrap": "^1.6.1",
+    "react-dom": "^17.0.2",
+    "react-draggable": "^4.4.4",
+    "react-grid-layout": "^1.2.5",
+    "react-plotly.js": "^2.5.1",
+    "react-redux": "^7.2.4",
+    "react-router-dom": "^5.2.0",
+    "react-scripts": "4.0.3",
+    "react-select": "^4.3.1",
+    "redux-devtools-extension": "^2.13.9",
+    "redux-logger": "^3.0.6",
+    "sweetalert2": "^11.1.5",
+    "sweetalert2-react-content": "^4.1.1",
+    "web-vitals": "^1.1.2"
+  },
+  "scripts": {
+    "start": "react-app-rewired start",
+    "build": "GENERATE_SOURCEMAP=false react-app-rewired --max-old-space-size=4096 build",
+    "test": "react-app-rewired test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "ie 11",
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.14.5",
+    "@babel/core": "^7.14.6",
+    "@babel/plugin-transform-arrow-functions": "^7.14.5",
+    "@babel/preset-env": "^7.14.5",
+    "@babel/preset-react": "^7.14.5",
+    "babel-plugin-module-resolver": "^4.1.0"
+  }
+}
