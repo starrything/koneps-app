@@ -28,6 +28,9 @@ import EditRole from "~/components/settings/roles/EditRole";
 import UserProfile from "~/components/settings/users/UserProfile";
 import EditUserProfile from "~/components/settings/users/EditUserProfile";
 
+import BidNotice from "~/components/data/bidnotice/BidNotice";
+import BeforeSpec from "~/components/data/beforespec/BeforeSpec";
+
 const App = (props) => {
   const dispatch = useDispatch();
   const history = useHistory();
@@ -86,7 +89,7 @@ const App = (props) => {
 
   return (
     <div className="App">
-      {/* <Gnb /> */}
+      <Gnb />
       <Switch>
         <Route exact path="/" component={Main} />
         <Route exact strict path="/login" component={Login} />
@@ -120,6 +123,8 @@ const App = (props) => {
         <Route path="/users/profile/edit" component={EditUserProfile} />
         {/* <Route path={`/chart/make/:chartId`} component={MakeChart} /> */}
         {/* <Route path="/chart/make/:chartId" render={(props) => <MakeChart {...props}/>} /> */}
+        <Route path="/bidnotice/list" component={BidNotice} />
+        <Route path="/beforespec/list" component={BeforeSpec} />
       </Switch>
     </div>
   );
