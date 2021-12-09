@@ -28,6 +28,7 @@ import EditRole from "~/components/settings/roles/EditRole";
 import UserProfile from "~/components/settings/users/UserProfile";
 import EditUserProfile from "~/components/settings/users/EditUserProfile";
 
+import Overview from "~/app/Overview";
 import BidNotice from "~/components/data/bidnotice/BidNotice";
 import BeforeSpec from "~/components/data/beforespec/BeforeSpec";
 import MeetUp from "~/components/meetup/MeetUp";
@@ -125,6 +126,7 @@ const App = (props) => {
         <Route path="/users/profile/edit" component={EditUserProfile} />
         {/* <Route path={`/chart/make/:chartId`} component={MakeChart} /> */}
         {/* <Route path="/chart/make/:chartId" render={(props) => <MakeChart {...props}/>} /> */}
+        <Route path="/overview" component={Overview} />
         <Route path="/bidnotice/list" component={BidNotice} />
         <Route path="/beforespec/list" component={BeforeSpec} />
         <Route path="/meetup/list" component={MeetUp} />

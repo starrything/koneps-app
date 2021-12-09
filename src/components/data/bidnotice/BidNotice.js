@@ -62,6 +62,10 @@ const BidNotice = (props) => {
   });
   const [bidNtceNo, setBidNtceNo] = useState("");
 
+  useEffect(() => {
+    searchBidNoticeList();
+  }, []);
+
   const onCellClicked = (params) => {
     setBidNtceNo(params.data.bidNtceNo);
     setSelectedRow({

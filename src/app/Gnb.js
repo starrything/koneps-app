@@ -37,7 +37,7 @@ const Gnb = (props) => {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav me-auto mb-2 mb-md-0">
               <li class="nav-item">
-                <Link to="#" className="nav-link active">
+                <Link to="/overview" className="nav-link active">
                   Overview
                 </Link>
               </li>

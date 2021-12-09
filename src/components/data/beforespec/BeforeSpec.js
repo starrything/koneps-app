@@ -52,6 +52,10 @@ const BeforeSpec = (props) => {
   });
   const [beforeSpecRgstNo, setBeforeSpecRgstNo] = useState("");
 
+  useEffect(() => {
+    searchBeforeSpecList();
+  }, []);
+
   const onCellClicked = (params) => {
     setBeforeSpecRgstNo(params.data.beforeSpecRgstNo);
     setSelectedRow({
