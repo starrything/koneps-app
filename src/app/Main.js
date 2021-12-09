@@ -12,10 +12,10 @@ const Main = (props) => {
   const history = useHistory();
 
   useEffect(() => {
-    checkValidToken();
-
-    getRoleList();
-    getUserList();
+    //TODO:
+    //checkValidToken();
+    //getRoleList();
+    //getUserList();
   }, []);
 
   const getRoleList = () => {

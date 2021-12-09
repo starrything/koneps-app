@@ -13,19 +13,32 @@ const gridOptions = {
   isScrollLag: () => false,
 };
 
+function currencyFormatter(params) {
+  // return '\xA3' + formatNumber(params.value);
+  return formatNumber(params.value);
+}
+function formatNumber(number) {
+  return Math.floor(number)
+    .toString()
+    .replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,');
+}
+
 const columnDefs = [
-  { headerName: "Dashboard Id", field: "dashboardId", hide: true },
+  { headerName: "공개일시", field: "rcptDt", sortable: true },
+  { headerName: "등록번호", field: "bfSpecRgstNo", width: "150", sortable: true },
   {
-    headerName: "Title",
-    field: "dashboardTitle",
-    width: "300",
+    headerName: "품명(사업명)",
+    field: "prdctClsfcNoNm",
+    width: "400",
     sortable: true,
   },
-  { headerName: "Status", field: "status", sortable: true },
-  { headerName: "Modified By", field: "modifiedBy", sortable: true },
-  { headerName: "Last Modified", field: "modifiedDate", sortable: true },
-  { headerName: "Created By", field: "createdBy", sortable: true },
-  { headerName: "Action", field: "action", cellRenderer: "ActionRenderer" },
+  { headerName: "배정예산", field: "asignBdgtAmt", width: "150", valueFormatter: currencyFormatter, cellClass: 'ag-right-aligned-cell', sortable: true },
+  { headerName: "의견등록 마감일시", field: "opninRgstClseDt", sortable: true },
+  { headerName: "수요기관명", field: "rlDminsttNm", sortable: true },
+  { headerName: "납품기한일시", field: "dlvrTmlmtDt", sortable: true },
+  { headerName: "납품일수", field: "dlvrDaynum", width: "150", sortable: true },
+  { headerName: "규격문서1", field: "specDocFileUrl1", width: "150", sortable: true },
+  { headerName: "규격문서2", field: "specDocFileUrl2", width: "150", sortable: true },
 ];
 
 const BeforeSpec = (props) => {
@@ -34,8 +47,8 @@ const BeforeSpec = (props) => {
   const [searchKeyword, setSearchKeyword] = useState("");
   const [rowData, setRowData] = useState([]);
   const [selectedRow, setSelectedRow] = useState({
-    dashboardId: "",
-    dashboardTitle: "",
+    beforeSpecRgstNo: "",
+    prdctClsfcNoNm: "",
   });
   const [beforeSpecRgstNo, setBeforeSpecRgstNo] = useState("");
 
@@ -57,7 +70,7 @@ const BeforeSpec = (props) => {
       keyword = searchKeyword;
     }
 
-    AxiosConfig.get("/api/dashboard/search", {
+    AxiosConfig.get("/api/g2b/beforespec/search", {
       params: {
         keyword: keyword,
       },
@@ -127,15 +140,15 @@ const BeforeSpec = (props) => {
       </div>
       {/* <!-- Grid Area --> */}
       <div className="container-fluid">
-        <div className="ag-theme-alpine" style={{ width: "100%", height: 500 }}>
+        <div className="ag-theme-alpine" style={{ width: "100%", height: 700 }}>
           <AgGridReact
             rowData={rowData}
             columnDefs={columnDefs}
             gridOptions={gridOptions}
             defaultColDef={{ resizable: true }}
-            frameworkComponents={{ ActionRenderer }}
+            //frameworkComponents={{ ActionRenderer }}
             onCellClicked={(params) => onCellClicked(params)}
-            onCellDoubleClicked={(params) => onCellDoubleClicked(params)}
+            //onCellDoubleClicked={(params) => onCellDoubleClicked(params)}
           />
         </div>
       </div>

@@ -30,6 +30,8 @@ import EditUserProfile from "~/components/settings/users/EditUserProfile";
 
 import BidNotice from "~/components/data/bidnotice/BidNotice";
 import BeforeSpec from "~/components/data/beforespec/BeforeSpec";
+import MeetUp from "~/components/meetup/MeetUp";
+import Links from "~/components/links/Links";
 
 const App = (props) => {
   const dispatch = useDispatch();
@@ -125,6 +127,8 @@ const App = (props) => {
         {/* <Route path="/chart/make/:chartId" render={(props) => <MakeChart {...props}/>} /> */}
         <Route path="/bidnotice/list" component={BidNotice} />
         <Route path="/beforespec/list" component={BeforeSpec} />
+        <Route path="/meetup/list" component={MeetUp} />
+        <Route path="/links/list" component={Links} />
       </Switch>
     </div>
   );

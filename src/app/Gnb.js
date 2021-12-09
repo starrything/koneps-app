@@ -52,12 +52,12 @@ const Gnb = (props) => {
                 </Link>
               </li>
               <li class="nav-item">
-                <Link to="#" className="nav-link active">
+                <Link to="/meetup/list" className="nav-link active">
                   MeetUp
                 </Link>
               </li>
               <li class="nav-item">
-                <Link to="#" className="nav-link active">
+                <Link to="/links/list" className="nav-link active">
                   Links
                 </Link>
               </li>
