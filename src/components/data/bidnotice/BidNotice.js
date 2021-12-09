@@ -20,12 +20,17 @@ function currencyFormatter(params) {
 function formatNumber(number) {
   return Math.floor(number)
     .toString()
-    .replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,');
+    .replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
 }
 
 const columnDefs = [
   { headerName: "공고일시", field: "bidNtceDt", sortable: true },
-  { headerName: "입찰공고번호", field: "bidNtceNo", width: "150", sortable: true },
+  {
+    headerName: "입찰공고번호",
+    field: "bidNtceNo",
+    width: "150",
+    sortable: true,
+  },
   {
     headerName: "입찰공고명",
     field: "bidNtceNm",
@@ -39,10 +44,29 @@ const columnDefs = [
     hide: true,
   },
   { headerName: "공고기관명", field: "ntceInsttNM", sortable: true },
-  { headerName: "수요기관코드", field: "dminsttCd", sortable: true, hide: true },
+  {
+    headerName: "수요기관코드",
+    field: "dminsttCd",
+    sortable: true,
+    hide: true,
+  },
   { headerName: "수요기관명", field: "dminsttNm", sortable: true },
-  { headerName: "예산금액", field: "asignBdgtAmt", width: "150", valueFormatter: currencyFormatter, cellClass: 'ag-right-aligned-cell', sortable: true },
-  { headerName: "추정가격", field: "presmptPrce", width: "150", valueFormatter: currencyFormatter, cellClass: 'ag-right-aligned-cell', sortable: true },
+  {
+    headerName: "예산금액",
+    field: "asignBdgtAmt",
+    width: "150",
+    valueFormatter: currencyFormatter,
+    cellClass: "ag-right-aligned-cell",
+    sortable: true,
+  },
+  {
+    headerName: "추정가격",
+    field: "presmptPrce",
+    width: "150",
+    valueFormatter: currencyFormatter,
+    cellClass: "ag-right-aligned-cell",
+    sortable: true,
+  },
   { headerName: "입찰방식", field: "bidMethdNm", width: "150", sortable: true },
   { headerName: "계약체결방법", field: "cntrctCnclsMthdNm", sortable: true },
   { headerName: "입찰마감일시", field: "bidClseDt", sortable: true },
