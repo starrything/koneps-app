@@ -6,17 +6,20 @@ import AxiosConfig from "~/AxiosConfig";
 const Links = (props) => {
   const pps_signature = "/images/links/pps_signature_ko.png";
   const koneps_signature = "/images/links/koneps_signature_ko.png";
+  const msi_signature = "/images/links/msi_signature_ko.png";
   const iitp_signature = "/images/links/iitp_signature_ko.png";
   return (
-    <main>
+    <div style={{marginTop: "56px"}}>
       <section className="py-5 text-center container">
         <div className="row py-lg-5">
-          <div className="col-lg-6 col-md-8 mx-auto">
-            <h1 className="fw-light">Album example</h1>
+          <div className="col-lg-10 col-md-8 mx-auto">
+            <h1 className="fw-light">Bookmarks</h1>
             <p className="lead text-muted">
-              Something short and leading about the collection below—its
-              contents, the creator, etc. Make it short and sweet, but not too
-              short so folks don’t simply skip over it entirely.
+              나라장터와 조달청 페이지를 비롯하여 소프트웨어 사업자에게 도움이
+              되는 페이지들을 모아두고 있습니다.
+              <br />
+              과학기술정보통신부와 정보통신기획평가원을 방문하여 정책 방향과
+              지원 사업들도 확인해보세요.
             </p>
           </div>
         </div>
@@ -94,7 +97,6 @@ const Links = (props) => {
                   width="100%"
                   height="225"
                 />
-
                 <div className="card-body">
                   <p className="card-text">
                     ICT R&D 기획·평가·혁신을 통해 미래 성장동력을 창출하는
@@ -116,10 +118,39 @@ const Links = (props) => {
                 </div>
               </div>
             </div>
+            <div className="col">
+              <div className="card shadow-sm">
+                <img
+                  className="bd-placeholder-img card-img-top"
+                  src={msi_signature}
+                  alt=""
+                  width="100%"
+                  height="225"
+                />
+                <div className="card-body">
+                  <p className="card-text">
+                    과학기술정책의 수립·총괄·조정·평가 및 4차 산업혁명 정책 총괄하는 정부기관입니다.
+                  </p>
+                  <div className="d-flex justify-content-between align-items-center">
+                    <div className="btn-group">
+                      <button
+                        type="button"
+                        className="btn btn-sm btn-outline-secondary"
+                        onClick={() => {
+                          window.open("https://www.msit.go.kr/index.do");
+                        }}
+                      >
+                        Move
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
-    </main>
+    </div>
   );
 };
 

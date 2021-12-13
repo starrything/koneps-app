@@ -13,9 +13,8 @@ const Gnb = (props) => {
   const gnbView = useSelector((state) => state.actionOfGlobal.gnbView);
 
   return (
-    <header>
-      <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-        <div class="container-fluid">
+      <nav className="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+        <div className="container-fluid">
           <Link
             to="/"
             className="navbar-brand"
@@ -24,7 +23,7 @@ const Gnb = (props) => {
             KONEPS
           </Link>
           <button
-            class="navbar-toggler"
+            className="navbar-toggler"
             type="button"
             data-bs-toggle="collapse"
             data-bs-target="#navbarCollapse"
@@ -32,59 +31,58 @@ const Gnb = (props) => {
             aria-expanded="false"
             aria-label="Toggle navigation"
           >
-            <span class="navbar-toggler-icon"></span>
+            <span className="navbar-toggler-icon"></span>
           </button>
-          <div class="collapse navbar-collapse" id="navbarCollapse">
-            <ul class="navbar-nav me-auto mb-2 mb-md-0">
-              <li class="nav-item">
+          <div className="collapse navbar-collapse" id="navbarCollapse">
+            <ul className="navbar-nav me-auto mb-2 mb-md-0">
+              <li className="nav-item">
                 <Link to="/overview" className="nav-link active">
                   Overview
                 </Link>
               </li>
-              <li class="nav-item">
+              <li className="nav-item">
                 <Link to="/bidnotice/list" className="nav-link active">
                   공고현황
                 </Link>
               </li>
-              <li class="nav-item">
+              <li className="nav-item">
                 <Link to="/beforespec/list" className="nav-link active">
                   사전규격공개
                 </Link>
               </li>
-              <li class="nav-item">
+              <li className="nav-item">
                 <Link to="/meetup/list" className="nav-link active">
                   MeetUp
                 </Link>
               </li>
-              <li class="nav-item">
+              <li className="nav-item">
                 <Link to="/links/list" className="nav-link active">
                   Links
                 </Link>
               </li>
-              {/* <li class="nav-item">
-                <a class="nav-link" href="#">
+              {/* <li className="nav-item">
+                <a className="nav-link" href="#">
                   Link
                 </a>
               </li>
-              <li class="nav-item">
-                <a class="nav-link disabled">Disabled</a>
+              <li className="nav-item">
+                <a className="nav-link disabled">Disabled</a>
               </li> */}
             </ul>
-            <form class="d-flex">
+            <form className="d-flex">
               <input
-                class="form-control me-2"
+                className="form-control me-2"
                 type="search"
                 placeholder="Search"
                 aria-label="Search"
               />
-              <button class="btn btn-outline-success" type="submit">
+              <button className="btn btn-outline-success" type="submit">
                 Search
               </button>
             </form>
           </div>
         </div>
       </nav>
-    </header>
   );
 };
 
