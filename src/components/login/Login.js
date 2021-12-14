@@ -97,7 +97,7 @@ const Login = (props) => {
         <form>
           <img
             className="mb-4"
-            src="/images/login/graph.png"
+            src="/images/login/asterik.png"
             alt=""
             width="72"
             height="72"

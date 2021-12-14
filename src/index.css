@@ -14,6 +14,14 @@ code {
 
 /* Show it is fixed to the top */
 body {
-  min-height: 75rem;
+  min-height: 55rem;
   padding-top: 3.5rem;
+}
+
+/* Signup */
+.flex-center {
+  -webkit-box-align: center;
+  /* align-items: center; */
+  -webkit-box-pack: center;
+  justify-content: center;
 }

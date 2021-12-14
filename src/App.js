@@ -6,8 +6,9 @@ import * as actionOfGlobal from "~/modules/global/actionOfGlobal";
 import AxiosConfig from "~/AxiosConfig";
 import { isEmpty, SynchroniseSession } from "~/components/Utils";
 
-import Login from "~/app/Login";
-import SsoLogin from "~/app/SsoLogin";
+import Signup from "~/components/login/Signup";
+import Login from "~/components/login/Login";
+import SsoLogin from "~/components/login/SsoLogin";
 import Gnb from "~/app/Gnb";
 import Main from "~/app/Main";
 import Database from "~/components/data/database/Database";
@@ -131,6 +132,7 @@ const App = (props) => {
         <Route path="/beforespec/list" component={BeforeSpec} />
         <Route path="/meetup/list" component={MeetUp} />
         <Route path="/links/list" component={Links} />
+        <Route path="/signup" component={Signup} />
       </Switch>
     </div>
   );

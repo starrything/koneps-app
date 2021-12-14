@@ -40,7 +40,7 @@ const AddUser = (props) => {
     (state) => state.actionOfCode.roleCodeList
   );
   const [roleList, setRoleList] = useState(roleCodeList);
-  const [passwordError, setPasswordError] = useState("");  
+  const [passwordError, setPasswordError] = useState("");
 
   useEffect(() => {
     //

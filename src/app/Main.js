@@ -108,15 +108,14 @@ const Main = (props) => {
 
             <div className="container">
               <div className="carousel-caption text-start">
-                <h1>Example headline.</h1>
+                <h1>처음 오셨나요?</h1>
                 <p>
-                  Some representative placeholder content for the first slide of
-                  the carousel.
+                  회원가입하시고 지금 바로 MeetUp에 참여해보세요!!
                 </p>
                 <p>
-                  <a className="btn btn-lg btn-primary" href="#">
+                  <Link className="btn btn-lg btn-primary" to="#">
                     Sign up today
-                  </a>
+                  </Link>
                 </p>
               </div>
             </div>

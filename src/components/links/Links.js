@@ -8,6 +8,7 @@ const Links = (props) => {
   const koneps_signature = "/images/links/koneps_signature_ko.png";
   const msi_signature = "/images/links/msi_signature_ko.png";
   const iitp_signature = "/images/links/iitp_signature_ko.png";
+  const kosme_signature = "/images/links/kosme_signature_ko.png";
   return (
     <div style={{marginTop: "56px"}}>
       <section className="py-5 text-center container">
@@ -138,6 +139,35 @@ const Links = (props) => {
                         className="btn btn-sm btn-outline-secondary"
                         onClick={() => {
                           window.open("https://www.msit.go.kr/index.do");
+                        }}
+                      >
+                        Move
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="col">
+              <div className="card shadow-sm">
+                <img
+                  className="bd-placeholder-img card-img-top"
+                  src={kosme_signature}
+                  alt=""
+                  width="100%"
+                  height="225"
+                />
+                <div className="card-body">
+                  <p className="card-text">
+                    중소벤처기업의 경쟁력을 강화하고 경영기반을 확충하여 국민경제 주역으로 육성을 지원합니다.
+                  </p>
+                  <div className="d-flex justify-content-between align-items-center">
+                    <div className="btn-group">
+                      <button
+                        type="button"
+                        className="btn btn-sm btn-outline-secondary"
+                        onClick={() => {
+                          window.open("http://kosmes.or.kr/sbc/SH/MAP/SHMAP001M0.do");
                         }}
                       >
                         Move
