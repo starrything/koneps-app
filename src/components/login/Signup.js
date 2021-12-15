@@ -64,7 +64,7 @@ const Signup = (props) => {
     }
 
     AxiosConfig.post("/api/user/register", {
-      username: name,
+      name: name,
       email: email,
       password: password,
     })
