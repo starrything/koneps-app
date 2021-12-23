@@ -2,8 +2,8 @@ import React, { useState, useEffect, useRef } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import AxiosConfig from "~/AxiosConfig";
-import { AgGridReact } from "ag-grid-react";
-import ActionRenderer from "~/components/dashboards/DashboardActionRenderer";
+import { AgGridReact, AgGridColumn } from "ag-grid-react";
+import ActionRenderer1 from "~/components/data/beforespec/BeforeSpecDocRenderer1";
 
 const gridOptions = {
   // PROPERTIES
@@ -20,25 +20,47 @@ function currencyFormatter(params) {
 function formatNumber(number) {
   return Math.floor(number)
     .toString()
-    .replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,');
+    .replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
 }
 
 const columnDefs = [
   { headerName: "공개일시", field: "rcptDt", sortable: true },
-  { headerName: "등록번호", field: "bfSpecRgstNo", width: "150", sortable: true },
+  {
+    headerName: "등록번호",
+    field: "bfSpecRgstNo",
+    width: "150",
+    sortable: true,
+  },
   {
     headerName: "품명(사업명)",
     field: "prdctClsfcNoNm",
     width: "400",
     sortable: true,
   },
-  { headerName: "배정예산", field: "asignBdgtAmt", width: "150", valueFormatter: currencyFormatter, cellClass: 'ag-right-aligned-cell', sortable: true },
+  {
+    headerName: "배정예산",
+    field: "asignBdgtAmt",
+    width: "150",
+    valueFormatter: currencyFormatter,
+    cellClass: "ag-right-aligned-cell",
+    sortable: true,
+  },
   { headerName: "의견등록 마감일시", field: "opninRgstClseDt", sortable: true },
   { headerName: "수요기관명", field: "rlDminsttNm", sortable: true },
   { headerName: "납품기한일시", field: "dlvrTmlmtDt", sortable: true },
   { headerName: "납품일수", field: "dlvrDaynum", width: "150", sortable: true },
-  { headerName: "규격문서1", field: "specDocFileUrl1", width: "150", sortable: true },
-  { headerName: "규격문서2", field: "specDocFileUrl2", width: "150", sortable: true },
+  {
+    headerName: "규격문서1",
+    field: "specDocFileUrl1",
+    width: "150",
+    sortable: true,
+  },
+  {
+    headerName: "규격문서2",
+    field: "specDocFileUrl2",
+    width: "150",
+    sortable: true,
+  },
 ];
 
 const BeforeSpec = (props) => {
@@ -49,6 +71,8 @@ const BeforeSpec = (props) => {
   const [selectedRow, setSelectedRow] = useState({
     beforeSpecRgstNo: "",
     prdctClsfcNoNm: "",
+    specDocFileUrl1: "",
+    specDocFileUrl2: "",
   });
   const [beforeSpecRgstNo, setBeforeSpecRgstNo] = useState("");
 
@@ -61,6 +85,8 @@ const BeforeSpec = (props) => {
     setSelectedRow({
       beforeSpecRgstNo: params.data.beforeSpecRgstNo,
       prdctClsfcNoNm: params.data.prdctClsfcNoNm,
+      specDocFileUrl1: params.data.specDocFileUrl1,
+      specDocFileUrl2: params.data.specDocFileUrl2,
     });
   };
 
@@ -147,13 +173,77 @@ const BeforeSpec = (props) => {
         <div className="ag-theme-alpine" style={{ width: "100%", height: 700 }}>
           <AgGridReact
             rowData={rowData}
-            columnDefs={columnDefs}
+            //columnDefs={columnDefs}
             gridOptions={gridOptions}
             defaultColDef={{ resizable: true }}
-            //frameworkComponents={{ ActionRenderer }}
+            frameworkComponents={{ ActionRenderer1 }}
             onCellClicked={(params) => onCellClicked(params)}
             //onCellDoubleClicked={(params) => onCellDoubleClicked(params)}
-          />
+          >
+            <AgGridColumn
+              field="rcptDt"
+              headerName="공개일시"
+              sortable="true"
+            />
+            <AgGridColumn
+              field="bfSpecRgstNo"
+              headerName="등록번호"
+              width="150"
+              sortable="true"
+            />
+            <AgGridColumn
+              field="prdctClsfcNoNm"
+              headerName="품명(사업명)"
+              width="400"
+              sortable="true"
+            />
+            <AgGridColumn
+              field="asignBdgtAmt"
+              headerName="배정예산"
+              width="150"
+              valueFormatter={currencyFormatter}
+              cellClass="ag-right-aligned-cell"
+              sortable="true"
+            />
+            <AgGridColumn
+              field="opninRgstClseDt"
+              headerName="의견등록 마감일시"
+              sortable="true"
+            />
+            <AgGridColumn
+              field="rlDminsttNm"
+              headerName="수요기관명"
+              sortable="true"
+            />
+            <AgGridColumn
+              field="dlvrTmlmtDt"
+              headerName="납품기한일시"
+              sortable="true"
+            />
+            <AgGridColumn
+              field="dlvrDaynum"
+              headerName="납품일수"
+              width="150"
+              sortable="true"
+            />
+            <AgGridColumn
+              field="specDocFileUrl1"
+              headerName="규격문서1"
+              cellRenderer="ActionRenderer1"
+              cellRendererParams={(params) => {
+                return { download: params.data.specDocFileUrl1 };
+              }}
+              width="120"
+              cellClass="ag-middle-aligned-cell"
+            />
+            <AgGridColumn
+              field="specDocFileUrl2"
+              headerName="규격문서2"
+              cellRenderer="ActionRenderer1"
+              cellRendererParams={selectedRow}
+              width="120"
+            />
+          </AgGridReact>
         </div>
       </div>
     </div>

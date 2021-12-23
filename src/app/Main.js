@@ -113,7 +113,7 @@ const Main = (props) => {
                   회원가입하시고 지금 바로 MeetUp에 참여해보세요!!
                 </p>
                 <p>
-                  <Link className="btn btn-lg btn-primary" to="#">
+                  <Link className="btn btn-lg btn-primary" to="/signup">
                     Sign up today
                   </Link>
                 </p>
