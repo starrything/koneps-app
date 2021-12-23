@@ -333,6 +333,7 @@ const BidNotice = (props) => {
               headerName="입찰공고"
               cellRenderer="ActionRenderer4"
               width="120"
+              hide="true"
             />
           </AgGridReact>
         </div>
