@@ -3,7 +3,7 @@ import { Link, useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import AxiosConfig from "~/AxiosConfig";
 import { AgGridReact, AgGridColumn } from "ag-grid-react";
-import ActionRenderer1 from "~/components/data/beforespec/BeforeSpecDocRenderer1";
+import ActionRenderer1 from "~/components/data/beforespec/BeforeSpecActionRenderer1";
 
 const gridOptions = {
   // PROPERTIES
@@ -230,9 +230,6 @@ const BeforeSpec = (props) => {
               field="specDocFileUrl1"
               headerName="규격문서1"
               cellRenderer="ActionRenderer1"
-              cellRendererParams={(params) => {
-                return { download: params.data.specDocFileUrl1 };
-              }}
               width="120"
               cellClass="ag-middle-aligned-cell"
             />
@@ -240,7 +237,6 @@ const BeforeSpec = (props) => {
               field="specDocFileUrl2"
               headerName="규격문서2"
               cellRenderer="ActionRenderer1"
-              cellRendererParams={selectedRow}
               width="120"
             />
           </AgGridReact>

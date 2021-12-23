@@ -2,8 +2,11 @@ import React, { useState, useEffect, useRef } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import AxiosConfig from "~/AxiosConfig";
-import { AgGridReact } from "ag-grid-react";
-import ActionRenderer from "~/components/dashboards/DashboardActionRenderer";
+import { AgGridReact, AgGridColumn } from "ag-grid-react";
+import ActionRenderer1 from "~/components/data/bidnotice/BidNoticeActionRenderer1";
+import ActionRenderer2 from "~/components/data/bidnotice/BidNoticeActionRenderer2";
+import ActionRenderer3 from "~/components/data/bidnotice/BidNoticeActionRenderer3";
+import ActionRenderer4 from "~/components/data/bidnotice/BidNoticeActionRenderer4";
 
 const gridOptions = {
   // PROPERTIES
@@ -83,6 +86,11 @@ const BidNotice = (props) => {
   const [selectedRow, setSelectedRow] = useState({
     bidNtceNo: "",
     bidNtceNm: "",
+    ntceSpecDocUrl1: "",
+    ntceSpecDocUrl2: "",
+    ntceSpecDocUrl3: "",
+    bidNtceDtlUrl: "",
+    bidNtceUrl: "",
   });
   const [bidNtceNo, setBidNtceNo] = useState("");
 
@@ -95,6 +103,11 @@ const BidNotice = (props) => {
     setSelectedRow({
       bidNtceNo: params.data.bidNtceNo,
       bidNtceNm: params.data.bidNtceNm,
+      ntceSpecDocUrl1: params.data.ntceSpecDocUrl1,
+      ntceSpecDocUrl2: params.data.ntceSpecDocUrl2,
+      ntceSpecDocUrl3: params.data.ntceSpecDocUrl3,
+      bidNtceDtlUrl: params.data.bidNtceDtlUrl,
+      bidNtceUrl: params.data.bidNtceUrl,
     });
   };
 
@@ -181,13 +194,147 @@ const BidNotice = (props) => {
         <div className="ag-theme-alpine" style={{ width: "100%", height: 700 }}>
           <AgGridReact
             rowData={rowData}
-            columnDefs={columnDefs}
+            //columnDefs={columnDefs}
             gridOptions={gridOptions}
             defaultColDef={{ resizable: true }}
-            // frameworkComponents={{ ActionRenderer }}
+            frameworkComponents={{ ActionRenderer1, ActionRenderer2, ActionRenderer3, ActionRenderer4 }}
             onCellClicked={(params) => onCellClicked(params)}
-            // onCellDoubleClicked={(params) => onCellDoubleClicked(params)}
-          />
+            //onCellDoubleClicked={(params) => onCellDoubleClicked(params)}
+          >
+            <AgGridColumn
+              field="bidNtceDt"
+              headerName="공고일시"
+              sortable="true"
+            />
+            <AgGridColumn
+              field="bidNtceNo"
+              headerName="입찰공고번호"
+              sortable="true"
+              width="150"
+            />
+            <AgGridColumn
+              field="bidNtceNm"
+              headerName="입찰공고명"
+              sortable="true"
+              width="400"
+            />
+            <AgGridColumn
+              field="ntceInsttCd"
+              headerName="공고기관코드"
+              sortable="true"
+              hide="true"
+            />
+            <AgGridColumn
+              field="ntceInsttNM"
+              headerName="공고기관명"
+              sortable="true"
+            />
+            <AgGridColumn
+              field="dminsttCd"
+              headerName="수요기관코드"
+              sortable="true"
+              hide="true"
+            />
+            <AgGridColumn
+              field="dminsttNm"
+              headerName="수요기관명"
+              sortable="true"
+            />
+            <AgGridColumn
+              field="asignBdgtAmt"
+              headerName="예산금액"
+              sortable="true"
+              width="150"
+              valueFormatter={currencyFormatter}
+              cellClass="ag-right-aligned-cell"
+            />
+            <AgGridColumn
+              field="presmptPrce"
+              headerName="추정가격"
+              sortable="true"
+              width="150"
+              valueFormatter={currencyFormatter}
+              cellClass="ag-right-aligned-cell"
+            />
+            <AgGridColumn
+              field="bidMethdNm"
+              headerName="입찰방식"
+              sortable="true"
+              width="150"
+            />
+            <AgGridColumn
+              field="cntrctCnclsMthdNm"
+              headerName="계약체결방법"
+              sortable="true"
+            />
+            <AgGridColumn
+              field="bidClseDt"
+              headerName="입찰마감일시"
+              sortable="true"
+            />
+            <AgGridColumn
+              field="opengDt"
+              headerName="개찰일시"
+              sortable="true"
+            />
+            <AgGridColumn
+              field="sucsfbidMthdNm"
+              headerName="낙찰방법"
+              sortable="true"
+            />
+            <AgGridColumn
+              field="rgstDt"
+              headerName="등록일시"
+              sortable="true"
+            />
+            <AgGridColumn
+              field="ntceSpecDocUrl1"
+              headerName="공고규격서1"
+              cellRenderer="ActionRenderer1"
+              width="120"
+              cellClass="ag-middle-aligned-cell"
+            />
+            <AgGridColumn
+              field="ntceSpecFileNm1"
+              headerName="공고규격파일명1"
+              hide="true"
+            />
+            <AgGridColumn
+              field="ntceSpecDocUrl2"
+              headerName="공고규격서2"
+              cellRenderer="ActionRenderer2"
+              width="120"
+            />
+            <AgGridColumn
+              field="ntceSpecFileNm2"
+              headerName="공고규격파일명2"
+              hide="true"
+            />
+            <AgGridColumn
+              field="ntceSpecDocUrl3"
+              headerName="공고규격서3"
+              cellRenderer="ActionRenderer3"
+              width="120"
+              cellClass="ag-middle-aligned-cell"
+            />
+            <AgGridColumn
+              field="ntceSpecFileNm3"
+              headerName="공고규격파일명3"
+              hide="true"
+            />
+            <AgGridColumn
+              field="bidNtceDtlUrl"
+              headerName="입찰공고상세"
+              cellRenderer="ActionRenderer4"
+              width="120"
+            />
+            <AgGridColumn
+              field="bidNtceUrl"
+              headerName="입찰공고"
+              cellRenderer="ActionRenderer4"
+              width="120"
+            />
+          </AgGridReact>
         </div>
       </div>
     </div>

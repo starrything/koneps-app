@@ -6,10 +6,9 @@ export default (props) => {
   const downloadLink = props.value;
   const disp = downloadLink.length > 0 ? "block" : "none";
 
-  const downloadBfSpec1 = () => {
+  const downloadBfSpec = () => {
     console.log(props);
     console.log(props.value);
-    console.log(props.value.length);
     window.open(props.value);
   }
   return (
@@ -18,7 +17,7 @@ export default (props) => {
         <button
           type="button"
           className="btn btn-outline-secondary btn-sm"
-          onClick={() => downloadBfSpec1()}
+          onClick={() => downloadBfSpec()}
         >
           <i className="bi bi-file-earmark-text"></i>
           <span className="visually-hidden">Button</span>
