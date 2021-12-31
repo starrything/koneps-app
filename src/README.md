@@ -46,10 +46,10 @@ import { Route, Switch } from 'react-router-dom';
 ```JSX
 import Gnb from './Gnb';
 import Main from './Main';
-import Database from './components/data/Database';
-import Dataset from './components/data/Dataset';
-import Charts from './components/charts/Charts';
-import Dashboards from './components/dashboards/Dashboards';
+import Database from './pages/data/Database';
+import Dataset from './pages/data/Dataset';
+import Charts from './pages/charts/Charts';
+import Dashboards from './pages/dashboards/Dashboards';
 ```
 - source review  
 ```JSX

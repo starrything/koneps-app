@@ -144,7 +144,7 @@ support to IE Browser
 
 ```
 for Popover
-+ ~/components/chart/make-chart/react-bs-popover-style.css
++ ~/pages/chart/make-chart/react-bs-popover-style.css
 ```
 
 ### react-redux & redux-logger & redux-devtools-extension
