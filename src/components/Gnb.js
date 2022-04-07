@@ -47,7 +47,7 @@ const Gnb = (props) => {
             </li>
             <li className="nav-item">
               <Link to="/beforespec/list" className="nav-link active">
-                사전규격공개
+                사전규격
               </Link>
             </li>
             <li className="nav-item">
