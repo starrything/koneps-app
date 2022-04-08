@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useRef, useContext } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Link as RouterLink, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import * as actionOfCode from "@src/modules/system/actionOfCode";
 import * as actionOfUser from "@modules/user/actionOfUser";
-import * as actionOfSettings from "@modules/system/actionOfSettings";
 import axiosConfig from "@utils/axiosConfig";
 import { SessionContext } from "@utils/cookies";
 import {Box, Divider, Grid, Paper} from "@mui/material";
@@ -10,7 +10,7 @@ import {Box, Divider, Grid, Paper} from "@mui/material";
 const Main = (props: any) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const session = useContext(SessionContext);
+  const cookieSession = useContext(SessionContext);
 
   useEffect(() => {
     //TODO:
@@ -34,7 +34,7 @@ const Main = (props: any) => {
               });
             });
             //setRoleList(roleOptions);
-            dispatch(actionOfSettings.setRoleList(roleOptions));
+            dispatch(actionOfCode.setRoleList(roleOptions));
           }
         })
         .catch(function (error) {
@@ -115,9 +115,9 @@ const Main = (props: any) => {
                       회원가입하시고 지금 바로 MeetUp에 참여해보세요!!
                     </p>
                     <p>
-                      <RouterLink className="btn btn-lg btn-primary" to="/signup">
+                      <Link className="btn btn-lg btn-primary" to="/signup">
                         Sign up today
-                      </RouterLink>
+                      </Link>
                     </p>
                   </div>
                 </div>
@@ -143,9 +143,9 @@ const Main = (props: any) => {
                       of the carousel.
                     </p>
                     <p>
-                      <RouterLink className="btn btn-lg btn-primary" to="#">
+                      <Link className="btn btn-lg btn-primary" to="#">
                         Learn more
-                      </RouterLink>
+                      </Link>
                     </p>
                   </div>
                 </div>
@@ -171,9 +171,9 @@ const Main = (props: any) => {
                       this carousel.
                     </p>
                     <p>
-                      <RouterLink className="btn btn-lg btn-primary" to="#">
+                      <Link className="btn btn-lg btn-primary" to="#">
                         Browse gallery
-                      </RouterLink>
+                      </Link>
                     </p>
                   </div>
                 </div>
@@ -229,9 +229,9 @@ const Main = (props: any) => {
               text below the carousel. This is the first column.
             </p>
             <p>
-              <RouterLink className="btn btn-secondary" to="#">
+              <Link className="btn btn-secondary" to="#">
                 View details »
-              </RouterLink>
+              </Link>
             </p>
           </Grid>
 
@@ -259,9 +259,9 @@ const Main = (props: any) => {
               time, we've moved on to the second column.
             </p>
             <p>
-              <RouterLink className="btn btn-secondary" to="#">
+              <Link className="btn btn-secondary" to="#">
                 View details »
-              </RouterLink>
+              </Link>
             </p>
           </Grid >
 
@@ -289,9 +289,9 @@ const Main = (props: any) => {
               content.
             </p>
             <p>
-              <RouterLink className="btn btn-secondary" to="#">
+              <Link className="btn btn-secondary" to="#">
                 View details »
-              </RouterLink>
+              </Link>
             </p>
           </Grid>
         </Grid>

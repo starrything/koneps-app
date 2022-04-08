@@ -4,8 +4,6 @@ import * as actionOfUser from "~/modules/global/actionOfUser";
 import * as actionOfCode from "~/modules/global/actionOfCode";
 import { Link, useHistory } from "react-router-dom";
 import AxiosConfig from "~/utils/AxiosConfig";
-import _, { set } from "lodash";
-import { isNotEmpty, isEmpty, checkValidToken } from "~/utils/Valid";
 
 const Main = (props) => {
   const dispatch = useDispatch();

@@ -1,13 +1,13 @@
 import { combineReducers } from 'redux';
 import session from "@modules/user/session";
 import actionOfUser from "@modules/user/actionOfUser";
-import actionOfSettings from "@modules/system/actionOfSettings";
+import actionOfCode from "@src/modules/system/actionOfCode";
 
 // to combine all reducers together
 const appReducer = combineReducers({
     session,
     actionOfUser,
-    actionOfSettings,
+    actionOfCode,
 });
 
 const RESET_STORE = "RESET_STORE";
@@ -35,9 +35,9 @@ const rootReducer = (state: any, action: any) => {
         //state = undefined;
 
         // exclude Login User Information
-        const { session, actionOfUser } = state;
+        const { session, actionOfUser, actionOfCode } = state;
         state = undefined;
-        state = { session, actionOfUser };
+        state = { session, actionOfUser, actionOfCode };
     }
 
     return appReducer(state, action)
