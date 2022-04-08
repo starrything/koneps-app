@@ -37,6 +37,10 @@
   }
 }
 
+/* Show it is fixed to the top */
+body {
+  min-height: 55rem;
+}
 body {
   font-size: .875rem;
 }
@@ -47,10 +51,17 @@ body {
   vertical-align: text-bottom;
 }
 
+/* Signup */
+.flex-center {
+  -webkit-box-align: center;
+  /* align-items: center; */
+  -webkit-box-pack: center;
+  justify-content: center;
+}
+
 /*
  * Navbar
  */
-
  .navbar-brand {
   padding-top: .75rem;
   padding-bottom: .75rem;
@@ -79,4 +90,12 @@ body {
 .form-control-dark:focus {
   border-color: transparent;
   box-shadow: 0 0 0 3px rgba(255, 255, 255, .25);
+}
+
+.grid_search_height{
+  height: calc(100vh - 300px);
+}
+
+.grid_search_height2{
+  height: calc(100vh - 40px);
 }

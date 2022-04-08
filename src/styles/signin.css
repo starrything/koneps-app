@@ -1,0 +1,6 @@
+.form-group > input::placeholder {
+    font-size: 80%;
+}
+.form-group {
+    padding-bottom: 10px;
+}
