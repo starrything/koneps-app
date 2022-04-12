@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { Link, useHistory } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import AxiosConfig from "~/utils/AxiosConfig";
 import { AgGridReact, AgGridColumn } from "ag-grid-react";
@@ -64,7 +64,7 @@ const columnDefs = [
 ];
 
 const BeforeSpec = (props) => {
-  let history = useHistory();
+  let navigate = useNavigate();
   const dispatch = useDispatch();
   const [searchKeyword, setSearchKeyword] = useState("");
   const [rowData, setRowData] = useState([]);
@@ -91,7 +91,7 @@ const BeforeSpec = (props) => {
   };
 
   const onCellDoubleClicked = (params) => {
-    history.push("/dashboard/view/" + params.data.dashboardId);
+    navigate("/dashboard/view/" + params.data.dashboardId);
   };
 
   const searchBeforeSpecList = () => {

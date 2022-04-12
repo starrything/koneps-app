@@ -53,7 +53,7 @@ const UserList = (props: any) => {
   };
 
   const onCellDoubleClicked = (params: any) => {
-    // history.push("/users/detail");
+    // navigate("/users/detail");
   };
 
   const searchUserList = () => {

@@ -16,8 +16,8 @@ import EditRole from "@pages/settings/roles/EditRole";
 import Overview from "@components/Overview";
 import BeforeSpecList from "@src/pages/beforespec/BeforeSpecList";
 import BidNoticeList from "@src/pages/bidnotice/BidNoticeList";
-import MeetUp from "@pages/meetup/MeetUp";
-import BookmarkList from "@src/pages/bookmark/BookmarkList";
+//import MeetUp from "@pages/meetup/MeetUp";
+//import BookmarkList from "@src/pages/bookmark/BookmarkList";
 
 const Router = (props: any) => {
   return (
@@ -35,8 +35,8 @@ const Router = (props: any) => {
       <Route path="/overview" element={<Overview />} />
       <Route path="/beforespec/list" element={<BeforeSpecList />}/>
       <Route path="/bidnotice/list" element={<BidNoticeList />} />
-      <Route path="/meetup/list" element={<MeetUp />}/>
-      <Route path="/bookmark/list" element={<BookmarkList />} />
+      {/* <Route path="/meetup/list" element={<MeetUp />}/>
+      <Route path="/bookmark/list" element={<BookmarkList />} /> */}
     </Routes>
   );
 };

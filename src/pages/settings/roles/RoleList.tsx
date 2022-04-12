@@ -41,7 +41,7 @@ const RoleList = (props: any) => {
   };
 
   const onCellDoubleClicked = (params: any) => {
-    // history.push("/users/detail");
+    // navigate("/users/detail");
   };
 
   const searchRoleList = () => {

@@ -4,7 +4,7 @@ import "bootstrap-icons/font/bootstrap-icons.css";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
 
-export default (props) => {
+export default (props: { value: string; }) => {
   const downloadLink = props.value;
   const disp = downloadLink.length > 0 ? "block" : "none";
 
@@ -15,7 +15,7 @@ export default (props) => {
     window.open(props.value);
   };
 
-  const renderInfo = (props) => (
+  const renderInfo = (props: JSX.IntrinsicAttributes) => (
     <Tooltip id="button-tooltip" {...props}>
       입찰공고 열기
     </Tooltip>

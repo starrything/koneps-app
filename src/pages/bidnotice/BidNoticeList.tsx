@@ -1,12 +1,13 @@
 import React, { useState, useEffect, useRef } from "react";
-import { Link, useHistory } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import AxiosConfig from "~/utils/AxiosConfig";
+import axiosConfig from "@utils/axiosConfig";
 import { AgGridReact, AgGridColumn } from "ag-grid-react";
-import ActionRenderer1 from "~/pages/data/bidnotice/BidNoticeActionRenderer1";
-import ActionRenderer2 from "~/pages/data/bidnotice/BidNoticeActionRenderer2";
-import ActionRenderer3 from "~/pages/data/bidnotice/BidNoticeActionRenderer3";
-import ActionRenderer4 from "~/pages/data/bidnotice/BidNoticeActionRenderer4";
+import ActionRenderer1 from "@pages/bidnotice/BidNoticeActionRenderer1";
+import ActionRenderer2 from "@pages/bidnotice/BidNoticeActionRenderer2";
+import ActionRenderer3 from "@pages/bidnotice/BidNoticeActionRenderer3";
+import ActionRenderer4 from "@pages/bidnotice/BidNoticeActionRenderer4";
+import { CellClickedEvent } from "ag-grid-community";
 
 const gridOptions = {
   // PROPERTIES
@@ -16,11 +17,11 @@ const gridOptions = {
   isScrollLag: () => false,
 };
 
-function currencyFormatter(params) {
+function currencyFormatter(params: { value: string; }) {
   // return '\xA3' + formatNumber(params.value);
-  return formatNumber(params.value);
+  return formatNumber(Number(params.value));
 }
-function formatNumber(number) {
+function formatNumber(number: number) {
   return Math.floor(number)
     .toString()
     .replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
@@ -78,8 +79,8 @@ const columnDefs = [
   { headerName: "등록일시", field: "rgstDt", sortable: true },
 ];
 
-const BidNotice = (props) => {
-  let history = useHistory();
+const BidNotice = (props: any) => {
+  let navigate = useNavigate();
   const dispatch = useDispatch();
   const [searchKeyword, setSearchKeyword] = useState("");
   const [rowData, setRowData] = useState([]);
@@ -98,7 +99,7 @@ const BidNotice = (props) => {
     searchBidNoticeList();
   }, []);
 
-  const onCellClicked = (params) => {
+  const onCellClicked = (params: CellClickedEvent) => {
     setBidNtceNo(params.data.bidNtceNo);
     setSelectedRow({
       bidNtceNo: params.data.bidNtceNo,
@@ -111,8 +112,8 @@ const BidNotice = (props) => {
     });
   };
 
-  const onCellDoubleClicked = (params) => {
-    history.push("/dashboard/view/" + params.data.dashboardId);
+  const onCellDoubleClicked = (params: { data: { dashboardId: string; }; }) => {
+    navigate("/dashboard/view/" + params.data.dashboardId);
   };
 
   const searchBidNoticeList = () => {
@@ -121,7 +122,7 @@ const BidNotice = (props) => {
       keyword = searchKeyword;
     }
 
-    AxiosConfig.get("/api/g2b/bidnotice/search", {
+    axiosConfig.get("/api/g2b/bidnotice/search", {
       params: {
         keyword: keyword,
       },

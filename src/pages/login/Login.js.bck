@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { Link, useHistory } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import AxiosConfig from "~/utils/AxiosConfig";
 import { useSelector, useDispatch } from "react-redux";
 import * as actions from "~/modules/login/user";
@@ -7,7 +7,7 @@ import * as actions from "~/modules/login/user";
 const Login = (props) => {
   const dispatch = useDispatch();
   let intFrameHeight = window.innerHeight - 56;
-  const history = useHistory();
+  const history = useNavigate();
 
   const loginUserName = useRef();
   const loginUserPassword = useRef();
@@ -55,7 +55,7 @@ const Login = (props) => {
         );
         AxiosConfig.defaults.headers["x-auth-token"] = response.data.token;
 
-        history.push("/");
+        navigate("/");
       })
       .catch(function (error) {
         // error
