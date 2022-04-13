@@ -1,10 +1,11 @@
 /* eslint-disable import/no-anonymous-default-export */
 import React from "react";
 import "bootstrap-icons/font/bootstrap-icons.css";
+import { isNotEmpty } from "@src/utils/valid";
 
-export default (props) => {
+export default (props: { value: string | URL | undefined; }) => {
   const downloadLink = props.value;
-  const disp = downloadLink.length > 0 ? "block" : "none";
+  const disp = isNotEmpty(downloadLink) ? "block" : "none";
 
   const downloadBfSpec = () => {
     console.log(props);

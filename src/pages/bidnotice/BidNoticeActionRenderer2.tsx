@@ -2,11 +2,12 @@
 import React from "react";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
-import Tooltip from "react-bootstrap/Tooltip";
+import Tooltip, { TooltipProps } from "react-bootstrap/Tooltip";
+import { isNotEmpty } from "@src/utils/valid";
 
-export default (props) => {
+export default (props: { value: string | URL | undefined; data: { ntceSpecFileNm2: any; }; }) => {
   const downloadLink = props.value;
-  const disp = downloadLink.length > 0 ? "block" : "none";
+  const disp = isNotEmpty(downloadLink) ? "block" : "none";
   let text = props.data.ntceSpecFileNm2;
 
   const downloadSpecDoc = () => {
@@ -16,7 +17,7 @@ export default (props) => {
     window.open(props.value);
   };
 
-  const renderInfo = (props) => (
+  const renderInfo = (props: JSX.IntrinsicAttributes & TooltipProps & React.RefAttributes<HTMLDivElement>) => (
     <Tooltip id="button-tooltip" {...props}>
       {text}
     </Tooltip>

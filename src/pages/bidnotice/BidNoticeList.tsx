@@ -3,11 +3,12 @@ import { Link, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import axiosConfig from "@utils/axiosConfig";
 import { AgGridReact, AgGridColumn } from "ag-grid-react";
+import { ColDef, CellClickedEvent } from "ag-grid-community";
 import ActionRenderer1 from "@pages/bidnotice/BidNoticeActionRenderer1";
 import ActionRenderer2 from "@pages/bidnotice/BidNoticeActionRenderer2";
 import ActionRenderer3 from "@pages/bidnotice/BidNoticeActionRenderer3";
 import ActionRenderer4 from "@pages/bidnotice/BidNoticeActionRenderer4";
-import { CellClickedEvent } from "ag-grid-community";
+import { currencyFormatter } from "@src/utils/formatter";
 
 const gridOptions = {
   // PROPERTIES
@@ -17,28 +18,18 @@ const gridOptions = {
   isScrollLag: () => false,
 };
 
-function currencyFormatter(params: { value: string; }) {
-  // return '\xA3' + formatNumber(params.value);
-  return formatNumber(Number(params.value));
-}
-function formatNumber(number: number) {
-  return Math.floor(number)
-    .toString()
-    .replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
-}
-
-const columnDefs = [
+const columnDefs: ColDef[] = [
   { headerName: "공고일시", field: "bidNtceDt", sortable: true },
   {
     headerName: "입찰공고번호",
     field: "bidNtceNo",
-    width: "150",
+    width: 150,
     sortable: true,
   },
   {
     headerName: "입찰공고명",
     field: "bidNtceNm",
-    width: "400",
+    width: 400,
     sortable: true,
   },
   {
@@ -58,7 +49,7 @@ const columnDefs = [
   {
     headerName: "예산금액",
     field: "asignBdgtAmt",
-    width: "150",
+    width: 150,
     valueFormatter: currencyFormatter,
     cellClass: "ag-right-aligned-cell",
     sortable: true,
@@ -66,17 +57,25 @@ const columnDefs = [
   {
     headerName: "추정가격",
     field: "presmptPrce",
-    width: "150",
+    width: 150,
     valueFormatter: currencyFormatter,
     cellClass: "ag-right-aligned-cell",
     sortable: true,
   },
-  { headerName: "입찰방식", field: "bidMethdNm", width: "150", sortable: true },
+  { headerName: "입찰방식", field: "bidMethdNm", width: 150, sortable: true },
   { headerName: "계약체결방법", field: "cntrctCnclsMthdNm", sortable: true },
   { headerName: "입찰마감일시", field: "bidClseDt", sortable: true },
   { headerName: "개찰일시", field: "opengDt", sortable: true },
   { headerName: "낙찰방법", field: "sucsfbidMthdNm", sortable: true },
   { headerName: "등록일시", field: "rgstDt", sortable: true },
+  { headerName: "공고규격서1", field: "ntceSpecDocUrl1", width: 120, cellClass: "ag-middle-aligned-cell", cellRenderer: "ActionRenderer1" },
+  { headerName: "공고규격파일명1", field: "ntceSpecFileNm1", hide: true },
+  { headerName: "공고규격서2", field: "ntceSpecDocUrl2", width: 120, cellClass: "ag-middle-aligned-cell", cellRenderer: "ActionRenderer2" },
+  { headerName: "공고규격파일명2", field: "ntceSpecFileNm2", hide: true },
+  { headerName: "공고규격서3", field: "ntceSpecDocUrl3", width: 120, cellClass: "ag-middle-aligned-cell", cellRenderer: "ActionRenderer3" },
+  { headerName: "공고규격파일명3", field: "ntceSpecFileNm3", hide: true },
+  { headerName: "입찰공고상세", field: "bidNtceDtlUrl", width: 120, cellClass: "ag-middle-aligned-cell", cellRenderer: "ActionRenderer4" },
+  { headerName: "입찰공고", field: "bidNtceUrl", hide: true },
 ];
 
 const BidNotice = (props: any) => {
@@ -195,13 +194,14 @@ const BidNotice = (props: any) => {
         <div className="ag-theme-alpine" style={{ width: "100%", height: 700 }}>
           <AgGridReact
             rowData={rowData}
-            //columnDefs={columnDefs}
+            columnDefs={columnDefs}
             gridOptions={gridOptions}
             defaultColDef={{ resizable: true }}
             frameworkComponents={{ ActionRenderer1, ActionRenderer2, ActionRenderer3, ActionRenderer4 }}
             onCellClicked={(params) => onCellClicked(params)}
-            //onCellDoubleClicked={(params) => onCellDoubleClicked(params)}
+          //onCellDoubleClicked={(params) => onCellDoubleClicked(params)}
           >
+            {/*             
             <AgGridColumn
               field="bidNtceDt"
               headerName="공고일시"
@@ -336,6 +336,7 @@ const BidNotice = (props: any) => {
               width="120"
               hide="true"
             />
+             */}
           </AgGridReact>
         </div>
       </div>
