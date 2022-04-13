@@ -160,7 +160,7 @@ const AddUser = (props: any) => {
     );
   };
   const promiseRoleOptions = (inputValue: string) =>
-    new Promise((resolve) => {
+    new Promise<any>((resolve) => {
       setTimeout(() => {
         resolve(filterRoles(inputValue));
       }, 1000);

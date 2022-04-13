@@ -79,7 +79,7 @@ const EditRole = (props: any) => {
     );
   };
   const promiseUserOptions = (inputValue: string) =>
-    new Promise((resolve) => {
+    new Promise<any>((resolve) => {
       setTimeout(() => {
         resolve(filterUsers(inputValue));
       }, 1000);
