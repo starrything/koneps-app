@@ -1,11 +1,12 @@
 import React, { useState, useEffect, useRef } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import axiosConfig from "@utils/axiosConfig";
 import { AgGridReact, AgGridColumn } from "ag-grid-react";
 import { ColDef, CellClickedEvent } from "ag-grid-community";
 import ActionRenderer1 from "@pages/beforespec/BeforeSpecActionRenderer1";
 import { currencyFormatter } from "@src/utils/formatter";
+import { Container, Box, Breadcrumbs, Link, Typography } from "@mui/material";
 
 const gridOptions = {
   // PROPERTIES
@@ -111,15 +112,18 @@ const BeforeSpec = (props: any) => {
   };
 
   return (
-    <div>
+    <Box sx={{ pt: 8.5 }}>
       <nav
         className="navbar navbar-expand-sm navbar-light bg-white shadow-sm"
         aria-label="Third navbar example"
       >
         <div className="container-fluid">
-          <Link to="#" className="navbar-brand">
-            사전규격 검색
-          </Link>
+          <Breadcrumbs aria-label="breadcrumb">
+            <Link underline="hover" color="inherit" href="/">
+              KONEPS
+            </Link>
+            <Typography color="text.primary">사전규격 검색</Typography>
+          </Breadcrumbs>
           <div className="collapse navbar-collapse" id="navbarsExample03">
             <ul className="navbar-nav me-auto mb-2 mb-sm-0"></ul>
             <form className="d-flex">
@@ -171,71 +175,12 @@ const BeforeSpec = (props: any) => {
             defaultColDef={{ resizable: true }}
             frameworkComponents={{ ActionRenderer1 }}
             onCellClicked={(params) => onCellClicked(params)}
-            //onCellDoubleClicked={(params) => onCellDoubleClicked(params)}
+          //onCellDoubleClicked={(params) => onCellDoubleClicked(params)}
           >
-            {/* <AgGridColumn
-              field="rcptDt"
-              headerName="공개일시"
-              sortable="true"
-            />
-            <AgGridColumn
-              field="bfSpecRgstNo"
-              headerName="등록번호"
-              width="150"
-              sortable="true"
-            />
-            <AgGridColumn
-              field="prdctClsfcNoNm"
-              headerName="품명(사업명)"
-              width="400"
-              sortable="true"
-            />
-            <AgGridColumn
-              field="asignBdgtAmt"
-              headerName="배정예산"
-              width="150"
-              valueFormatter={currencyFormatter}
-              cellClass="ag-right-aligned-cell"
-              sortable="true"
-            />
-            <AgGridColumn
-              field="opninRgstClseDt"
-              headerName="의견등록 마감일시"
-              sortable="true"
-            />
-            <AgGridColumn
-              field="rlDminsttNm"
-              headerName="수요기관명"
-              sortable="true"
-            />
-            <AgGridColumn
-              field="dlvrTmlmtDt"
-              headerName="납품기한일시"
-              sortable="true"
-            />
-            <AgGridColumn
-              field="dlvrDaynum"
-              headerName="납품일수"
-              width="150"
-              sortable="true"
-            />
-            <AgGridColumn
-              field="specDocFileUrl1"
-              headerName="규격문서1"
-              cellRenderer="ActionRenderer1"
-              width="120"
-              cellClass="ag-middle-aligned-cell"
-            />
-            <AgGridColumn
-              field="specDocFileUrl2"
-              headerName="규격문서2"
-              cellRenderer="ActionRenderer1"
-              width="120"
-            /> */}
           </AgGridReact>
         </div>
       </div>
-    </div>
+    </Box>
   );
 };
 

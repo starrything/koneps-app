@@ -14,7 +14,6 @@ import {
   Toolbar,
   Typography,
 } from "@mui/material";
-import AutoStoriesIcon from "@mui/icons-material/AutoStories";
 import SearchIcon from "@mui/icons-material/Search";
 import SigninBlock from "@components/gnb/SigninBlock";
 
@@ -87,7 +86,7 @@ const Gnb = (props: any) => {
         }}
       >
         <Toolbar sx={{ flexWrap: "wrap" }}>
-          <AutoStoriesIcon sx={{ my: 1, mx: 1 }}></AutoStoriesIcon>
+          {/* TODO: Icon  */}
           <Typography
             variant="h6"
             color="inherit"

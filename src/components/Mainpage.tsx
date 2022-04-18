@@ -5,7 +5,7 @@ import * as actionOfCode from "@src/modules/system/actionOfCode";
 import * as actionOfUser from "@modules/user/actionOfUser";
 import axiosConfig from "@utils/axiosConfig";
 import { SessionContext } from "@utils/cookies";
-import {Box, Divider, Grid, Paper} from "@mui/material";
+import { Container, Box, Divider, Grid, Paper } from "@mui/material";
 
 const Main = (props: any) => {
   const dispatch = useDispatch();
@@ -21,89 +21,90 @@ const Main = (props: any) => {
 
   const getRoleList = () => {
     axiosConfig.get("/api/role/list")
-        .then(function (response) {
-          // success
-          //setRoleOptions(response.data);
-          let roleOptions: { value: string; label: string; }[] = [];
+      .then(function (response) {
+        // success
+        //setRoleOptions(response.data);
+        let roleOptions: { value: string; label: string; }[] = [];
 
-          if (response.data !== undefined && response.data.length > 0) {
-            response.data.forEach((element: { [x: string]: string; }) => {
-              roleOptions.push({
-                value: element["role"],
-                label: element["role"],
-              });
+        if (response.data !== undefined && response.data.length > 0) {
+          response.data.forEach((element: { [x: string]: string; }) => {
+            roleOptions.push({
+              value: element["role"],
+              label: element["role"],
             });
-            //setRoleList(roleOptions);
-            dispatch(actionOfCode.setRoleList(roleOptions));
-          }
-        })
-        .catch(function (error) {
-          // error
-        })
-        .then(function () {
-          // finally
-        });
+          });
+          //setRoleList(roleOptions);
+          dispatch(actionOfCode.setRoleList(roleOptions));
+        }
+      })
+      .catch(function (error) {
+        // error
+      })
+      .then(function () {
+        // finally
+      });
   };
 
   const getUserList = () => {
     axiosConfig.get("/api/user/list")
-        .then(function (response) {
-          // success
-          let userOptions: { value: string; label: string; }[] = [];
-          response.data.forEach((element: { [x: string]: string; }) => {
-            userOptions.push({
-              value: element["username"],
-              label: element["firstName"] + " " + element["lastName"],
-            });
+      .then(function (response) {
+        // success
+        let userOptions: { value: string; label: string; }[] = [];
+        response.data.forEach((element: { [x: string]: string; }) => {
+          userOptions.push({
+            value: element["username"],
+            label: element["firstName"] + " " + element["lastName"],
           });
-          // setUserList(userOptions);
-          dispatch(actionOfUser.setUserList(userOptions));
-        })
-        .catch(function (error) {
-          // error
-        })
-        .then(function () {
-          // finally
         });
+        // setUserList(userOptions);
+        dispatch(actionOfUser.setUserList(userOptions));
+      })
+      .catch(function (error) {
+        // error
+      })
+      .then(function () {
+        // finally
+      });
   };
 
   return (
-      <main>
+    <main>
+      <Container sx={{ pt: 8.5, pb: 6 }}>
         <Paper>
           <div id="myCarousel" className="carousel slide" data-bs-ride="carousel">
             <div className="carousel-indicators">
               <button
-                  type="button"
-                  data-bs-target="#myCarousel"
-                  data-bs-slide-to="0"
-                  className=""
-                  aria-label="Slide 1"
+                type="button"
+                data-bs-target="#myCarousel"
+                data-bs-slide-to="0"
+                className=""
+                aria-label="Slide 1"
               ></button>
               <button
-                  type="button"
-                  data-bs-target="#myCarousel"
-                  data-bs-slide-to="1"
-                  aria-label="Slide 2"
-                  className="active"
-                  aria-current="true"
+                type="button"
+                data-bs-target="#myCarousel"
+                data-bs-slide-to="1"
+                aria-label="Slide 2"
+                className="active"
+                aria-current="true"
               ></button>
               <button
-                  type="button"
-                  data-bs-target="#myCarousel"
-                  data-bs-slide-to="2"
-                  aria-label="Slide 3"
+                type="button"
+                data-bs-target="#myCarousel"
+                data-bs-slide-to="2"
+                aria-label="Slide 3"
               ></button>
             </div>
             <div className="carousel-inner">
               <div className="carousel-item">
                 <svg
-                    className="bd-placeholder-img"
-                    width="100%"
-                    height="100%"
-                    xmlns="http://www.w3.org/2000/svg"
-                    aria-hidden="true"
-                    preserveAspectRatio="xMidYMid slice"
-                    focusable="false"
+                  className="bd-placeholder-img"
+                  width="100%"
+                  height="100%"
+                  xmlns="http://www.w3.org/2000/svg"
+                  aria-hidden="true"
+                  preserveAspectRatio="xMidYMid slice"
+                  focusable="false"
                 >
                   <rect width="100%" height="100%" fill="#777"></rect>
                 </svg>
@@ -124,13 +125,13 @@ const Main = (props: any) => {
               </div>
               <div className="carousel-item active">
                 <svg
-                    className="bd-placeholder-img"
-                    width="100%"
-                    height="100%"
-                    xmlns="http://www.w3.org/2000/svg"
-                    aria-hidden="true"
-                    preserveAspectRatio="xMidYMid slice"
-                    focusable="false"
+                  className="bd-placeholder-img"
+                  width="100%"
+                  height="100%"
+                  xmlns="http://www.w3.org/2000/svg"
+                  aria-hidden="true"
+                  preserveAspectRatio="xMidYMid slice"
+                  focusable="false"
                 >
                   <rect width="100%" height="100%" fill="#777"></rect>
                 </svg>
@@ -152,13 +153,13 @@ const Main = (props: any) => {
               </div>
               <div className="carousel-item">
                 <svg
-                    className="bd-placeholder-img"
-                    width="100%"
-                    height="100%"
-                    xmlns="http://www.w3.org/2000/svg"
-                    aria-hidden="true"
-                    preserveAspectRatio="xMidYMid slice"
-                    focusable="false"
+                  className="bd-placeholder-img"
+                  width="100%"
+                  height="100%"
+                  xmlns="http://www.w3.org/2000/svg"
+                  aria-hidden="true"
+                  preserveAspectRatio="xMidYMid slice"
+                  focusable="false"
                 >
                   <rect width="100%" height="100%" fill="#777"></rect>
                 </svg>
@@ -180,19 +181,19 @@ const Main = (props: any) => {
               </div>
             </div>
             <button
-                className="carousel-control-prev"
-                type="button"
-                data-bs-target="#myCarousel"
-                data-bs-slide="prev"
+              className="carousel-control-prev"
+              type="button"
+              data-bs-target="#myCarousel"
+              data-bs-slide="prev"
             >
               <span className="carousel-control-prev-icon" aria-hidden="true"></span>
               <span className="visually-hidden">Previous</span>
             </button>
             <button
-                className="carousel-control-next"
-                type="button"
-                data-bs-target="#myCarousel"
-                data-bs-slide="next"
+              className="carousel-control-next"
+              type="button"
+              data-bs-target="#myCarousel"
+              data-bs-slide="next"
             >
               <span className="carousel-control-next-icon" aria-hidden="true"></span>
               <span className="visually-hidden">Next</span>
@@ -207,14 +208,14 @@ const Main = (props: any) => {
         <Grid container spacing={2}>
           <Grid item xs={12} md={4}>
             <svg
-                className="bd-placeholder-img rounded-circle"
-                width="140"
-                height="140"
-                xmlns="http://www.w3.org/2000/svg"
-                role="img"
-                aria-label="Placeholder: 140x140"
-                preserveAspectRatio="xMidYMid slice"
-                focusable="false"
+              className="bd-placeholder-img rounded-circle"
+              width="140"
+              height="140"
+              xmlns="http://www.w3.org/2000/svg"
+              role="img"
+              aria-label="Placeholder: 140x140"
+              preserveAspectRatio="xMidYMid slice"
+              focusable="false"
             >
               <title>Placeholder</title>
               <rect width="100%" height="100%" fill="#777"></rect>
@@ -237,14 +238,14 @@ const Main = (props: any) => {
 
           <Grid item xs={12} md={4}>
             <svg
-                className="bd-placeholder-img rounded-circle"
-                width="140"
-                height="140"
-                xmlns="http://www.w3.org/2000/svg"
-                role="img"
-                aria-label="Placeholder: 140x140"
-                preserveAspectRatio="xMidYMid slice"
-                focusable="false"
+              className="bd-placeholder-img rounded-circle"
+              width="140"
+              height="140"
+              xmlns="http://www.w3.org/2000/svg"
+              role="img"
+              aria-label="Placeholder: 140x140"
+              preserveAspectRatio="xMidYMid slice"
+              focusable="false"
             >
               <title>Placeholder</title>
               <rect width="100%" height="100%" fill="#777"></rect>
@@ -267,14 +268,14 @@ const Main = (props: any) => {
 
           <Grid item xs={12} md={4}>
             <svg
-                className="bd-placeholder-img rounded-circle"
-                width="140"
-                height="140"
-                xmlns="http://www.w3.org/2000/svg"
-                role="img"
-                aria-label="Placeholder: 140x140"
-                preserveAspectRatio="xMidYMid slice"
-                focusable="false"
+              className="bd-placeholder-img rounded-circle"
+              width="140"
+              height="140"
+              xmlns="http://www.w3.org/2000/svg"
+              role="img"
+              aria-label="Placeholder: 140x140"
+              preserveAspectRatio="xMidYMid slice"
+              focusable="false"
             >
               <title>Placeholder</title>
               <rect width="100%" height="100%" fill="#777"></rect>
@@ -296,7 +297,7 @@ const Main = (props: any) => {
           </Grid>
         </Grid>
         {/* <!-- /.row --> */}
-        <Divider/>
+        <Divider />
 
         {/* <!-- START THE FEATURETTES --> */}
         <Grid container spacing={5} sx={{ mt: 3 }}>
@@ -312,21 +313,21 @@ const Main = (props: any) => {
           </Grid>
           <Grid item xs={12} md={4}>
             <Box
-                sx={{
-                  position: 'relative',
-                  p: { xs: 3, md: 6 },
-                  pr: { md: 0 },
-                }}
+              sx={{
+                position: 'relative',
+                p: { xs: 3, md: 6 },
+                pr: { md: 0 },
+              }}
             >
               <svg
-                  className="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto"
-                  width="500"
-                  height="500"
-                  xmlns="http://www.w3.org/2000/svg"
-                  role="img"
-                  aria-label="Placeholder: 500x500"
-                  preserveAspectRatio="xMidYMid slice"
-                  focusable="false"
+                className="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto"
+                width="500"
+                height="500"
+                xmlns="http://www.w3.org/2000/svg"
+                role="img"
+                aria-label="Placeholder: 500x500"
+                preserveAspectRatio="xMidYMid slice"
+                focusable="false"
               >
                 <title>Placeholder</title>
                 <rect width="100%" height="100%" fill="#eee"></rect>
@@ -338,7 +339,7 @@ const Main = (props: any) => {
           </Grid>
           {/*<Main title="From the firehose" posts={posts} />*/}
         </Grid>
-        <Divider/>
+        <Divider />
 
         <Grid container spacing={5} sx={{ mt: 3 }}>
           <Grid item xs={12} md={8}>
@@ -354,21 +355,21 @@ const Main = (props: any) => {
           </Grid>
           <Grid item xs={12} md={4}>
             <Box
-                sx={{
-                  position: 'relative',
-                  p: { xs: 3, md: 6 },
-                  pr: { md: 0 },
-                }}
+              sx={{
+                position: 'relative',
+                p: { xs: 3, md: 6 },
+                pr: { md: 0 },
+              }}
             >
               <svg
-                  className="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto"
-                  width="500"
-                  height="500"
-                  xmlns="http://www.w3.org/2000/svg"
-                  role="img"
-                  aria-label="Placeholder: 500x500"
-                  preserveAspectRatio="xMidYMid slice"
-                  focusable="false"
+                className="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto"
+                width="500"
+                height="500"
+                xmlns="http://www.w3.org/2000/svg"
+                role="img"
+                aria-label="Placeholder: 500x500"
+                preserveAspectRatio="xMidYMid slice"
+                focusable="false"
               >
                 <title>Placeholder</title>
                 <rect width="100%" height="100%" fill="#eee"></rect>
@@ -379,9 +380,9 @@ const Main = (props: any) => {
             </Box>
           </Grid>
         </Grid>
-        <Divider/>
+        <Divider />
 
-        <Grid container spacing={5} sx={{ mt: 3}}>
+        <Grid container spacing={5} sx={{ mt: 3 }}>
           <Grid item xs={12} md={8}>
             <h2 className="featurette-heading">
               And lastly, this one.{" "}
@@ -396,21 +397,21 @@ const Main = (props: any) => {
           </Grid>
           <Grid item xs={12} md={4}>
             <Box
-                sx={{
-                  position: 'relative',
-                  p: { xs: 3, md: 6 },
-                  pr: { md: 0 },
-                }}
+              sx={{
+                position: 'relative',
+                p: { xs: 3, md: 6 },
+                pr: { md: 0 },
+              }}
             >
               <svg
-                  className="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto"
-                  width="500"
-                  height="500"
-                  xmlns="http://www.w3.org/2000/svg"
-                  role="img"
-                  aria-label="Placeholder: 500x500"
-                  preserveAspectRatio="xMidYMid slice"
-                  focusable="false"
+                className="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto"
+                width="500"
+                height="500"
+                xmlns="http://www.w3.org/2000/svg"
+                role="img"
+                aria-label="Placeholder: 500x500"
+                preserveAspectRatio="xMidYMid slice"
+                focusable="false"
               >
                 <title>Placeholder</title>
                 <rect width="100%" height="100%" fill="#eee"></rect>
@@ -421,8 +422,9 @@ const Main = (props: any) => {
             </Box>
           </Grid>
         </Grid>
-        {/* <!-- /END THE FEATURETTES --> */}
-      </main>
+      </Container>
+      {/* <!-- /END THE FEATURETTES --> */}
+    </main>
   );
 };
 

@@ -1,6 +1,7 @@
 import { Link as RouterLink } from "react-router-dom";
 
-import {Container, Grid, Link, Stack, Typography} from "@mui/material";
+import { scrollToTop } from "@utils/util";
+import { Container, Grid, Link, Stack, Typography } from "@mui/material";
 
 function Copyright() {
     return (
@@ -15,13 +16,6 @@ function Copyright() {
 }
 
 const Footer = (props: any) => {
-    const scrollToTop = () => {
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth' // for smoothly scrolling
-        });
-    };
-
     return (
         <Container
             component="footer"
@@ -34,7 +28,7 @@ const Footer = (props: any) => {
             <Grid container spacing={2}>
                 <Grid item xs={10}>
                     <Stack direction="row" spacing={1}>
-                        <Copyright/>
+                        <Copyright />
                         <Link display="block" variant="body1" component={RouterLink} to={"#"}>
                             Privacy
                         </Link>
@@ -44,7 +38,7 @@ const Footer = (props: any) => {
                     </Stack>
                 </Grid>
                 <Grid item xs={2}>
-                    <Link display="block" variant="body1" onClick={scrollToTop}>Back to top</Link>
+                    <Link display="block" variant="body1" onClick={scrollToTop}><span style={{ cursor: "pointer" }}>Back to top</span></Link>
                 </Grid>
             </Grid>
         </Container>
