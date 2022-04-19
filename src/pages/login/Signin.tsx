@@ -3,7 +3,10 @@ import { Link, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import axiosConfig from "@utils/axiosConfig";
 import * as actions from "@modules/user/session";
-
+import { Box, Container, Grid, CssBaseline, TextField, Typography } from "@mui/material";
+import Button, { ButtonProps } from '@mui/material/Button';
+import { createTheme, ThemeProvider, styled } from "@mui/material/styles";
+import { purple } from '@mui/material/colors';
 import withReactContent from "sweetalert2-react-content";
 import Swal from "sweetalert2";
 
@@ -26,7 +29,17 @@ interface LoginInfo {
   loginYn: Boolean;
 }
 
+const ColorButton = styled(Button)<ButtonProps>(({ theme }) => ({
+  color: theme.palette.getContrastText(purple[500]),
+  backgroundColor: purple[500],
+  '&:hover': {
+    backgroundColor: purple[700],
+  },
+}));
+
 const MySwal = withReactContent(Swal);
+
+const theme = createTheme();
 
 const Login = (props: any) => {
   const dispatch = useDispatch();
@@ -86,7 +99,7 @@ const Login = (props: any) => {
           lastAccessTime: currentTime,
           loginYn: true,
         };
-        
+
         // 1. redux store
         dispatch(actions.setLoginInfo(loginInfo));
 
@@ -132,65 +145,60 @@ const Login = (props: any) => {
     }
   };
   return (
-    <div
-      className="text-center"
-      style={{
-        display: "flex",
-        alignItems: "center",
-        paddingTop: "40px",
-        paddingBottom: "40px",
-        backgroundColor: "#ffffff",
-        height: intFrameHeight,
-        margin: "0",
-      }}
-    >
-      <main
-        className="form-signin"
-        style={{
-          width: "100%",
-          maxWidth: "430px",
-          padding: "15px",
-          margin: "auto",
-          display: "block",
-        }}
-      >
-        <img
-          className="mb-4"
-          src="/images/login/asterik.png"
-          alt=""
-          width="72"
-          height="72"
-        />
-        <div className="card border-0">
-          <h1 className="h1 mb-3 fw-bold">Read with us</h1>
-          <article className="card-body">
-            <form>
-              <div className="form-group">
-                <input
-                  name=""
-                  className="form-control form-control-lg"
+    <ThemeProvider theme={theme}>
+      <Container component="main" maxWidth="xs" sx={{ pt: 8.5, pb: 6, textAlign: "left" }}>
+        <CssBaseline />
+        <Box
+          sx={{
+            marginTop: 8,
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+          }}
+        >
+          <img
+            className="mb-4"
+            src="/images/login/asterik.png"
+            alt=""
+            width="72"
+            height="72"
+          />
+          <Typography component="h1" variant="h3">
+            Please with us!
+          </Typography>
+          <Box component="form" noValidate sx={{ mt: 3 }}>
+            <Grid container spacing={2}>
+              <Grid item xs={12}>
+                <TextField required
+                  fullWidth
+                  id="email"
+                  label="이메일"
+                  name="email"
+                  autoComplete="email"
                   placeholder="이메일을 입력하세요"
                   type="email"
-                  ref={loginUserName}
-                />
-              </div>
-              <div className="form-group">
-                <input
-                  className="form-control form-control-lg"
+                  autoFocus
+                  ref={loginUserName} />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField required
+                  fullWidth
+                  id="password"
+                  label="password"
                   placeholder="비밀번호를 입력하세요"
                   type="password"
                   ref={loginUserPassword}
                 />
-              </div>
-              <div className="form-group">
+              </Grid>
+              <Grid item xs={12}>
                 <div className="checkbox" style={{ float: "left" }}>
                   <input type="checkbox" />
                   <label style={{ verticalAlign: "1.5px" }}>
                     &nbsp;자동 로그인
                   </label>
                 </div>
-              </div>
-              <div className="form-group">
+              </Grid>
+              <Grid item xs={12}>
                 <button
                   type="button"
                   className="btn btn-lg btn-info w-100"
@@ -202,30 +210,32 @@ const Login = (props: any) => {
                   onClick={goLogin}
                   ref={loginSubmit}
                 >
-                  로그인
+                  Sign in
                 </button>
-              </div>
-              <div className="form-group">
+              </Grid>
+              <Grid item xs={12}>
                 <Link
                   to="/signup"
                   className="btn btn-lg btn-outline-secondary w-100"
                   style={{ fontSize: "110%" }}
                 >
-                  회원가입
+                  Register
                 </Link>
-              </div>
-              <Link
-                to="#"
-                className="float-right"
-                style={{ color: "#888", textDecoration: "none" }}
-              >
-                비밀번호를 잊어버리셨나요?
-              </Link>
-            </form>
-          </article>
-        </div>
-      </main>
-    </div>
+              </Grid>
+              <Grid item xs={12}>
+                <Link
+                  to="#"
+                  className="float-right"
+                  style={{ color: "#888", textDecoration: "none" }}
+                >
+                  비밀번호를 잊어버리셨나요?
+                </Link>
+              </Grid>
+            </Grid>
+          </Box>
+        </Box>
+      </Container>
+    </ThemeProvider>
   );
 };
 

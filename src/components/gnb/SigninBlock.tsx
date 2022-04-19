@@ -81,7 +81,7 @@ const SigninBlock: React.FC<Props> = (props) => {
           component={Link}
           to={"/login"}
         >
-          Log in
+          Sign in
         </Button>
         <Button
           color="inherit"

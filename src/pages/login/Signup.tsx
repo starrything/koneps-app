@@ -1,41 +1,34 @@
 import * as React from "react";
-import Avatar from "@mui/material/Avatar";
-import Button from "@mui/material/Button";
-import CssBaseline from "@mui/material/CssBaseline";
-import TextField from "@mui/material/TextField";
-import Grid from "@mui/material/Grid";
-import Box from "@mui/material/Box";
-import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
-import Typography from "@mui/material/Typography";
-import Container from "@mui/material/Container";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
 import axiosConfig from "@utils/axiosConfig";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { Box, Container, Grid, CssBaseline, TextField, Typography } from "@mui/material";
+import Button, { ButtonProps } from '@mui/material/Button';
+import { createTheme, ThemeProvider, styled } from "@mui/material/styles";
+import { purple } from '@mui/material/colors';
 import withReactContent from "sweetalert2-react-content";
 import Swal from "sweetalert2";
-
-const MySwal = withReactContent(Swal);
-
-const theme = createTheme();
 
 interface Signup {
   codeList: [{ code: string; value: string }];
 }
 
+const MySwal = withReactContent(Swal);
+
+const theme = createTheme();
+
+const ColorButton = styled(Button)<ButtonProps>(({ theme }) => ({
+  color: theme.palette.getContrastText(purple[500]),
+  backgroundColor: purple[500],
+  '&:hover': {
+    backgroundColor: purple[700],
+  },
+}));
+
 const Signup = (props: any) => {
   useEffect(() => {
-    // 컴포넌트 로드시 1번 실행
-    getCodeList();
-    getLocList();
+    // TODO: call function at component mounted
   }, []);
-
-  const [codeList, setCodeList] = useState<Signup["codeList"]>([
-    { code: "", value: "" },
-  ]);
-  const [locList, setLocList] = useState<Signup["codeList"]>([
-    { code: "", value: "" },
-  ]);
 
   let navigate = useNavigate();
   let intFrameHeight = window.innerHeight - 56;
@@ -131,47 +124,9 @@ const Signup = (props: any) => {
       });
   };
 
-  const getCodeList = () => {
-    axiosConfig
-      .get("/api/code", {
-        params: {
-          code: "INTEREST_TOPIC",
-        },
-      })
-      .then(function (response) {
-        // success
-        setCodeList(response.data);
-      })
-      .catch(function (error) {
-        // error
-      })
-      .then(function () {
-        // finally
-      });
-  };
-
-  const getLocList = () => {
-    axiosConfig
-      .get("/api/code", {
-        params: {
-          code: "INTEREST_LOC",
-        },
-      })
-      .then(function (response) {
-        // success
-        setLocList(response.data);
-      })
-      .catch(function (error) {
-        // error
-      })
-      .then(function () {
-        // finally
-      });
-  };
-
   return (
     <ThemeProvider theme={theme}>
-      <Container component="main" maxWidth="xs">
+      <Container component="main" maxWidth="xs" sx={{ pt: 8.5, pb: 6, textAlign: "left" }}>
         <CssBaseline />
         <Box
           sx={{
@@ -181,11 +136,15 @@ const Signup = (props: any) => {
             alignItems: "center",
           }}
         >
-          <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
-            <LockOutlinedIcon />
-          </Avatar>
-          <Typography component="h1" variant="h5">
-            회원가입
+          <img
+            className="mb-4"
+            src="/images/login/asterik.png"
+            alt=""
+            width="72"
+            height="72"
+          />
+          <Typography component="h1" variant="h3">
+            Please with us!
           </Typography>
           <Box component="form" noValidate sx={{ mt: 3 }}>
             <Grid container spacing={2}>
@@ -225,105 +184,13 @@ const Signup = (props: any) => {
                   id="confirmPassword"
                   value={confirmPassword}
                   onChange={handleInputChange}
-                  //autoComplete="new-password"
+                //autoComplete="new-password"
                 />
-              </Grid>
-
-              <Grid item xs={12}>
-                <TextField
-                  autoComplete="given-name"
-                  name="name"
-                  required
-                  fullWidth
-                  id="name"
-                  label="이름"
-                  value={name}
-                  onChange={handleInputChange}
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  id="date"
-                  label="생년월일"
-                  type="date"
-                  defaultValue="2017-05-24"
-                  sx={{ width: "100%" }}
-                  InputLabelProps={{
-                    shrink: true,
-                  }}
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <div className="mb-3" style={{ paddingTop: "10px" }}>
-                  <label
-                    className="form-label"
-                    htmlFor="name"
-                    style={{ float: "left" }}
-                  >
-                    관심 주제
-                  </label>
-                  <ul className="mylist" style={{ clear: "both" }}>
-                    {codeList.map((code, key) => (
-                      <li key={key}>
-                        <input
-                          type="checkbox"
-                          className="btn-check btn-secondary"
-                          id={code.code}
-                          autoComplete="off"
-                          value={code.code}
-                        />
-                        <label
-                          className="btn btn-sm btn-outline-secondary"
-                          htmlFor={code.code}
-                        >
-                          {code.value}
-                        </label>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-                <div
-                  className="mb-3"
-                  style={{ paddingTop: "15px", clear: "both" }}
-                >
-                  <label
-                    className="form-label"
-                    htmlFor="name"
-                    style={{ float: "left" }}
-                  >
-                    관심 지역
-                  </label>
-                  <ul className="mylist" style={{ clear: "both" }}>
-                    {locList.map((code, key) => (
-                      <li key={key}>
-                        <input
-                          type="checkbox"
-                          className="btn-check btn-secondary"
-                          id={code.code}
-                          autoComplete="off"
-                          value={code.code}
-                        />
-                        <label
-                          className="btn btn-sm btn-outline-secondary"
-                          htmlFor={code.code}
-                        >
-                          {code.value}
-                        </label>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
               </Grid>
             </Grid>
-            <Button
-              type="button"
-              fullWidth
-              variant="contained"
-              sx={{ mt: 3, mb: 2 }}
-              onClick={register}
-            >
-              가입하기
-            </Button>
+            <ColorButton type="button" size="large"
+              fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}
+              onClick={register}>Register</ColorButton>
           </Box>
         </Box>
       </Container>
