@@ -164,7 +164,7 @@ const Login = (props: any) => {
             height="72"
           />
           <Typography component="h1" variant="h3">
-            Please with us!
+            Sign in
           </Typography>
           <Box component="form" noValidate sx={{ mt: 3 }}>
             <Grid container spacing={2}>
@@ -177,7 +177,6 @@ const Login = (props: any) => {
                   autoComplete="email"
                   placeholder="이메일을 입력하세요"
                   type="email"
-                  autoFocus
                   ref={loginUserName} />
               </Grid>
               <Grid item xs={12}>

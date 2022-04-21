@@ -122,7 +122,7 @@ const BidNotice = (props: any) => {
       keyword = searchKeyword;
     }
 
-    axiosConfig.get("/api/g2b/bidnotice/search", {
+    axiosConfig.get("/api/v1/g2b/bidnotice/search", {
       params: {
         keyword: keyword,
       },

@@ -36,7 +36,7 @@ const ResetPasswordModal = (props: any) => {
     }
 
     axiosConfig
-      .put("/api/user/reset-password", {
+      .put("/api/v1/user/reset-password", {
         password: fields["confirmResetPassword"],
       })
       .then(function (response) {

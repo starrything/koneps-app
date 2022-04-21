@@ -64,7 +64,7 @@ const EditUserProfile = (props: any) => {
   const saveUserInfo = () => {
     var regex = /[^0-9]/g;
 
-    axiosConfig.put("/api/user/update", {
+    axiosConfig.put("/api/v1/user/update", {
       firstName: firstName,
       lastName: lastName,
       tel: tel.replace(regex, ""),

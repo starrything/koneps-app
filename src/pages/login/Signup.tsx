@@ -1,21 +1,46 @@
 import * as React from "react";
 import axiosConfig from "@utils/axiosConfig";
 import { useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { Box, Container, Grid, CssBaseline, TextField, Typography } from "@mui/material";
 import Button, { ButtonProps } from '@mui/material/Button';
-import { createTheme, ThemeProvider, styled } from "@mui/material/styles";
-import { purple } from '@mui/material/colors';
+import { createTheme, ThemeProvider, styled, withStyles } from "@mui/material/styles";
+import { purple, red } from '@mui/material/colors';
 import withReactContent from "sweetalert2-react-content";
 import Swal from "sweetalert2";
 
+// TODO: 1. email 검증 로직 필요 -> 인증코드 발송 및 확인
+// TODO: 2. 비밀번호 정규식 추가
 interface Signup {
   codeList: [{ code: string; value: string }];
 }
 
 const MySwal = withReactContent(Swal);
 
-const theme = createTheme();
+const theme = createTheme({
+  typography: {
+    error: {
+      color: 'red',
+    }
+  }
+});
+declare module '@mui/material/styles' {
+  interface TypographyVariants {
+    error: React.CSSProperties;
+  }
+
+  // allow configuration using `createTheme`
+  interface TypographyVariantsOptions {
+    error?: React.CSSProperties;
+  }
+}
+
+// Update the Typography's variant prop options
+declare module '@mui/material/Typography' {
+  interface TypographyPropsVariantOverrides {
+    error: true;
+  }
+}
 
 const ColorButton = styled(Button)<ButtonProps>(({ theme }) => ({
   color: theme.palette.getContrastText(purple[500]),
@@ -31,8 +56,8 @@ const Signup = (props: any) => {
   }, []);
 
   let navigate = useNavigate();
-  let intFrameHeight = window.innerHeight - 56;
 
+  const passwordErrorText = useRef<HTMLInputElement>(null);
   const [userinfo, setUserinfo] = useState({
     name: "",
     email: "",
@@ -52,10 +77,17 @@ const Signup = (props: any) => {
       if (name === "password") {
         currPassword = value;
         currConfirmPassword = confirmPassword;
+        if(password.length == 0 && confirmPassword.length == 0 && passwordErrorText.current !== null) {
+          passwordErrorText.current.style.display = "none";
+        }
       }
+
       if (name === "confirmPassword") {
         currPassword = password;
         currConfirmPassword = value;
+        if (password.length > 0 && passwordErrorText.current !== null) {
+          passwordErrorText.current.style.display = "block";
+        }
       }
 
       if (currPassword === currConfirmPassword) {
@@ -74,22 +106,7 @@ const Signup = (props: any) => {
     setUserinfo(nextUserinfo);
   };
 
-  /*
-    const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-        event.preventDefault();
-        const data = new FormData(event.currentTarget);
-        // eslint-disable-next-line no-console
-        console.log({
-            email: data.get('email'),
-            password: data.get('password'),
-        });
-    };
-*/
-
   const register = () => {
-    if (name.length === 0) {
-      return;
-    }
     if (email.length === 0) {
       return;
     }
@@ -98,7 +115,7 @@ const Signup = (props: any) => {
     }
 
     axiosConfig
-      .post("/api/user/signup", {
+      .post("/api/v1/user/register", {
         username: name,
         email: email,
         password: password,
@@ -107,16 +124,20 @@ const Signup = (props: any) => {
         // success
         MySwal.fire({
           icon: "success",
-          text: "Success!",
+          title: "Success!",
+          text: "Successfuly registered.",
+        }).then(function(isConfirm) {
+          if(isConfirm) {
+            navigate("/");
+          }
         });
-        navigate("/");
       })
       .catch(function (error) {
-        // error
-        //alert("Failed to save this Dataset.");
+        // error.response
         MySwal.fire({
           icon: "error",
-          text: "Failed to registration.",
+          title: "Error!",
+          text: error.response.data.message,
         });
       })
       .then(function () {
@@ -156,7 +177,6 @@ const Signup = (props: any) => {
                   label="이메일"
                   name="email"
                   autoComplete="email"
-                  autoFocus
                   value={email}
                   onChange={handleInputChange}
                 />
@@ -186,6 +206,7 @@ const Signup = (props: any) => {
                   onChange={handleInputChange}
                 //autoComplete="new-password"
                 />
+                <Typography variant="error" sx={{ display: "none" }} ref={passwordErrorText}>{passwordError}</Typography>
               </Grid>
             </Grid>
             <ColorButton type="button" size="large"

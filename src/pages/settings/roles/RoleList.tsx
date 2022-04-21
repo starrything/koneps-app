@@ -50,7 +50,7 @@ const RoleList = (props: any) => {
       keyword = searchKeyword;
     }
 
-    axiosConfig.get("/api/role/search", {
+    axiosConfig.get("/api/v1/role/search", {
       params: {
         keyword: keyword,
       },

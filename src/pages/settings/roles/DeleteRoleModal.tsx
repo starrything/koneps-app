@@ -17,7 +17,7 @@ const DeleteRoleModal = (props: any) => {
     let role = props.role;
     let searchRoleList = props.searchRoleList;
 
-    axiosConfig.delete("/api/role", {
+    axiosConfig.delete("/api/v1/role", {
       params: {
         role: role,
       },

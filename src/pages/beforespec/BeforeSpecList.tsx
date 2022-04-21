@@ -94,7 +94,7 @@ const BeforeSpec = (props: any) => {
       keyword = searchKeyword;
     }
 
-    axiosConfig.get("/api/g2b/beforespec/search", {
+    axiosConfig.get("/api/v1/g2b/beforespec/search", {
       params: {
         keyword: keyword,
       },

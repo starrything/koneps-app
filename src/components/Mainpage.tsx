@@ -20,7 +20,7 @@ const Main = (props: any) => {
   }, []);
 
   const getRoleList = () => {
-    axiosConfig.get("/api/role/list")
+    axiosConfig.get("/api/v1/role/list")
       .then(function (response) {
         // success
         //setRoleOptions(response.data);
@@ -46,7 +46,7 @@ const Main = (props: any) => {
   };
 
   const getUserList = () => {
-    axiosConfig.get("/api/user/list")
+    axiosConfig.get("/api/v1/user/list")
       .then(function (response) {
         // success
         let userOptions: { value: string; label: string; }[] = [];

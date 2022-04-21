@@ -17,7 +17,7 @@ const DeleteUserModal = (props: any) => {
     let username = props.username;
     let searchUserList = props.searchUserList;
 
-    axiosConfig.delete("/api/user", {
+    axiosConfig.delete("/api/v1/user", {
       params: {
         username: username,
       },

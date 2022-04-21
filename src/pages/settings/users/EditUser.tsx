@@ -68,7 +68,7 @@ const EditUser = (props: any) => {
   }, []);
 
   const getUserDetails = (userId: any) => {
-    axiosConfig.get("/api/user/detail", {
+    axiosConfig.get("/api/v1/user/detail", {
       params: {
         username: userId,
       },
@@ -233,7 +233,7 @@ const EditUser = (props: any) => {
 
     let convertIsActive = isActive === false ? 0 : 1;
 
-    axiosConfig.put("/api/user", {
+    axiosConfig.put("/api/v1/user", {
       firstName: firstName,
       lastName: lastName,
       username: username,

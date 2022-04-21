@@ -122,7 +122,7 @@ const AddUser = (props: any) => {
 
     let convertIsActive = isActive === false ? 0 : 1;
 
-    axiosConfig.post("/api/user", {
+    axiosConfig.post("/api/v1/user", {
       firstName: firstName,
       lastName: lastName,
       username: username,

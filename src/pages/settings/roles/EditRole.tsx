@@ -26,7 +26,7 @@ const EditRole = (props: any) => {
   }, []);
 
   const getUserListByRole = (role: any) => {
-    axiosConfig.get("/api/role/users", {
+    axiosConfig.get("/api/v1/role/users", {
       params: {
         role: role,
       },
@@ -52,7 +52,7 @@ const EditRole = (props: any) => {
   };
 
   const getUserDetails = (userId: any) => {
-    axiosConfig.get("/api/user/detail", {
+    axiosConfig.get("/api/v1/user/detail", {
       params: {
         username: userId,
       },
@@ -111,7 +111,7 @@ const EditRole = (props: any) => {
     });
 
     //TODO:
-    // axiosConfig.put("/api/role", {
+    // axiosConfig.put("/api/v1/role", {
     //   role: roleName,
     //   permissions: permissions,
     //   users: users,

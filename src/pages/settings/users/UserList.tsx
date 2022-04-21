@@ -63,7 +63,7 @@ const UserList = (props: any) => {
     }
 
     axiosConfig
-      .get("/api/user/search", {
+      .get("/api/v1/user/search", {
         params: {
           keyword: keyword,
         },
