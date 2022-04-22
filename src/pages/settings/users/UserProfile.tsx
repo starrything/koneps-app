@@ -1,16 +1,17 @@
 import React, { useState, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch, RootStateOrAny } from "react-redux";
 import ResetPasswordModal from "@pages/settings/users/ResetPasswordModal";
 import { isNotEmpty } from "@utils/valid";
+import { Box, Breadcrumbs, Container, Link, Typography } from "@mui/material";
 
 const UserProfile = (props: any) => {
   const nvigate = useNavigate();
-  const user = useSelector((state: RootStateOrAny) => state.user.loginInfo);
+  const user = useSelector((state: RootStateOrAny) => state.session.loginInfo);
   const [roles, setRoles] = useState("");
   const {
     loginId,
-    isActive,
+    isValid,
     firstName,
     lastName,
     tel,
@@ -21,7 +22,7 @@ const UserProfile = (props: any) => {
   var regex = /[^0-9]/g;
   const [userInfo, setUserInfo] = useState({
     loginId: loginId,
-    isActive: isActive,
+    isValid: isValid,
     firstName: firstName,
     lastName: lastName,
     tel: isNotEmpty(tel) ? tel.replace(regex, "") : "",
@@ -48,29 +49,33 @@ const UserProfile = (props: any) => {
     getRoles();
   }, []);
   return (
-    <div>
+    <Box sx={{ pt: 8.5 }}>
       <nav
         className="navbar navbar-expand-sm navbar-light bg-white shadow-sm"
         aria-label="Third navbar example"
       >
         <div className="container-fluid">
-          <Link to="#" className="navbar-brand">
-            Your user information
-          </Link>
+          <Breadcrumbs aria-label="breadcrumb">
+            <Link underline="hover" color="inherit" href="/">
+              KONEPS
+            </Link>
+            <Typography color="text.primary">My Profile</Typography>
+          </Breadcrumbs>
           <div className="collapse navbar-collapse" id="navbarsExample03">
             <ul className="navbar-nav me-auto mb-2 mb-sm-0"></ul>
-            <form className="d-flex"></form>
+            <form className="d-flex">
+            </form>
           </div>
         </div>
       </nav>
-      <div className="container">
+      <Container>
         <div className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
           <div className="row align-items-start">
             <div className="input-group mb-3">User info</div>
           </div>
         </div>
-      </div>
-      <div className="container">
+      </Container>
+      <Container>
         <table className="table table-bordered">
           <tbody>
             <tr>
@@ -81,7 +86,7 @@ const UserProfile = (props: any) => {
             </tr>
             <tr>
               <th scope="row">Is Active?</th>
-              <td>{userInfo.isActive === 1 ? "True" : "False"}</td>
+              <td>{userInfo.isValid === 1 ? "True" : "False"}</td>
             </tr>
             <tr>
               <th scope="row">Role</th>
@@ -90,15 +95,15 @@ const UserProfile = (props: any) => {
             </tr>
           </tbody>
         </table>
-      </div>
-      <div className="container">
+      </Container>
+      <Container>
         <div className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
           <div className="row align-items-start">
             <div className="input-group mb-3">Personal info</div>
           </div>
         </div>
-      </div>
-      <div className="container">
+      </Container>
+      <Container>
         <table className="table table-bordered">
           <tbody>
             <tr>
@@ -135,11 +140,11 @@ const UserProfile = (props: any) => {
             </tr>
           </tbody>
         </table>
-      </div>
-      <div className="container">
+      </Container>
+      <Container>
         <div className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom"></div>
-      </div>
-      <div className="container">
+      </Container>
+      <Container>
         <form className="d-flex">
           <div style={{ display: "inline-block", paddingRight: "5px" }}>
             <button
@@ -155,16 +160,16 @@ const UserProfile = (props: any) => {
             <button
               className="btn btn-success"
               type="button"
-              onClick={() => nvigate("/users/profile/edit")}
+              onClick={() => nvigate("/user/profile/edit")}
             >
-              Edit user
+              Edit
             </button>
           </div>
         </form>
-      </div>
+      </Container>
       {/* <!-- Modal --> */}
       <ResetPasswordModal />
-    </div>
+    </Box>
   );
 };
 

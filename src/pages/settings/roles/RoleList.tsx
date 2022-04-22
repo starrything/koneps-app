@@ -6,6 +6,7 @@ import { AgGridReact } from "ag-grid-react";
 import { isNotEmpty } from "@utils/valid";
 import ActionRenderer from "@pages/settings/roles/RoleListActionRenderer";
 import DeleteRoleModal from "@pages/settings/roles/DeleteRoleModal";
+import { Container, Box } from "@mui/material";
 
 const gridOptions = {
   // PROPERTIES
@@ -66,9 +67,9 @@ const RoleList = (props: any) => {
         // finally
       });
   };
-  return(
-    <div>
-      <div className="container">
+  return (
+    <Box sx={{ pt: 8.5 }}>
+      <Container>
         <div className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
           <div className="row align-items-start">
             <div className="input-group">
@@ -81,8 +82,8 @@ const RoleList = (props: any) => {
             </Link> */}
           </div>
         </div>
-      </div>
-      <div className="container">
+      </Container>
+      <Container>
         {/* <!-- Grid Area --> */}
         <div className="container-fluid">
           <div
@@ -100,10 +101,11 @@ const RoleList = (props: any) => {
             />
           </div>
         </div>
-      </div>
+      </Container>
       {/* <!-- Modal --> */}
       <DeleteRoleModal role={role} searchRoleList={searchRoleList} />
-    </div>);
+    </Box>
+  );
 };
 
 export default RoleList;

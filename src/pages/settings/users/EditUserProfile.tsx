@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch, RootStateOrAny } from "react-redux";
 import axiosConfig from "@utils/axiosConfig";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
+import { Box, Breadcrumbs, Container, Link, Typography } from "@mui/material";
 
 const MySwal = withReactContent(Swal);
 
@@ -17,7 +18,7 @@ interface userinfo {
 }
 const EditUserProfile = (props: any) => {
   const navigate = useNavigate();
-  const user = useSelector((state: RootStateOrAny) => state.user.loginInfo);
+  const user = useSelector((state: RootStateOrAny) => state.session.loginInfo);
 
   const [userinfo, setUserinfo] = useState<userinfo>({
     firstName: user.firstName,
@@ -93,29 +94,33 @@ const EditUserProfile = (props: any) => {
   };
 
   return (
-    <div>
+    <Box sx={{ pt: 8.5 }}>
       <nav
         className="navbar navbar-expand-sm navbar-light bg-white shadow-sm"
         aria-label="Third navbar example"
       >
         <div className="container-fluid">
-          <Link to="#" className="navbar-brand">
-            Edit user information
-          </Link>
+          <Breadcrumbs aria-label="breadcrumb">
+            <Link underline="hover" color="inherit" href="/">
+              KONEPS
+            </Link>
+            <Typography color="text.primary">Edit My Profile</Typography>
+          </Breadcrumbs>
           <div className="collapse navbar-collapse" id="navbarsExample03">
             <ul className="navbar-nav me-auto mb-2 mb-sm-0"></ul>
-            <form className="d-flex"></form>
+            <form className="d-flex">
+            </form>
           </div>
         </div>
       </nav>
-      <div className="container">
+      <Container>
         <div className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
           <div className="row align-items-start">
             <div className="input-group mb-3">User info</div>
           </div>
         </div>
-      </div>
-      <div className="container">
+      </Container>
+      <Container>
         <table className="table table-bordered">
           <tbody>
             <tr>
@@ -191,11 +196,11 @@ const EditUserProfile = (props: any) => {
             </tr>
           </tbody>
         </table>
-      </div>
-      <div className="container">
+      </Container>
+      <Container>
         <div className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom"></div>
-      </div>
-      <div className="container">
+      </Container>
+      <Container>
         <form className="d-flex">
           <div style={{ display: "inline-block", paddingRight: "5px" }}>
             <button
@@ -207,8 +212,8 @@ const EditUserProfile = (props: any) => {
             </button>
           </div>
         </form>
-      </div>
-    </div>
+      </Container>
+    </Box>
   );
 };
 

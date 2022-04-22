@@ -3,6 +3,7 @@ import axiosConfig from "@utils/axiosConfig";
 import { isEmpty } from "@utils/valid";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
+import { Box } from "@mui/material";
 
 const MySwal = withReactContent(Swal);
 const ResetPasswordModal = (props: any) => {
@@ -84,80 +85,82 @@ const ResetPasswordModal = (props: any) => {
     modalForm.current?.reset();
   };
   return (
-    <div
-      className="modal fade"
-      id="ResetPasswordModal"
-      //tabIndex="-1"
-      aria-labelledby="ResetPasswordModalLabel"
-      aria-hidden="true"
-    >
-      <div className="modal-dialog modal-lg">
-        <div className="modal-content">
-          <div className="modal-header">
-            <h5 className="modal-title" id="ResetPasswordModalLabel">
-              Reset My Password
-            </h5>
-            <button
-              type="button"
-              className="btn-close"
-              data-bs-dismiss="modal"
-              aria-label="Close"
-            ></button>
-          </div>
-          <div className="modal-body">
-            <form ref={modalForm}>
-              <div className="mb-3">
-                Password*
-                <div className="row">
-                  <div className="col">
-                    <input
-                      type="text"
-                      className="form-control"
-                      id="resetPassword"
-                      name="resetPassword"
-                      onChange={(e) => handleInputChange(e)}
-                    />
+    <Box sx={{ pt: 8.5 }}>
+      <div
+        className="modal fade"
+        id="ResetPasswordModal"
+        //tabIndex="-1"
+        aria-labelledby="ResetPasswordModalLabel"
+        aria-hidden="true"
+      >
+        <div className="modal-dialog modal-lg">
+          <div className="modal-content">
+            <div className="modal-header">
+              <h5 className="modal-title" id="ResetPasswordModalLabel">
+                Reset My Password
+              </h5>
+              <button
+                type="button"
+                className="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div className="modal-body">
+              <form ref={modalForm}>
+                <div className="mb-3">
+                  Password*
+                  <div className="row">
+                    <div className="col">
+                      <input
+                        type="text"
+                        className="form-control"
+                        id="resetPassword"
+                        name="resetPassword"
+                        onChange={(e) => handleInputChange(e)}
+                      />
+                    </div>
                   </div>
                 </div>
-              </div>
-              <div className="mb-3">
-                Confirm Password
-                <div className="row">
-                  <div className="col">
-                    <input
-                      type="text"
-                      className="form-control"
-                      id="confirmResetPassword"
-                      name="confirmResetPassword"
-                      onChange={(e) => handleInputChange(e)}
-                    />
-                    <span style={{ color: "red" }}>{formErrors}</span>
+                <div className="mb-3">
+                  Confirm Password
+                  <div className="row">
+                    <div className="col">
+                      <input
+                        type="text"
+                        className="form-control"
+                        id="confirmResetPassword"
+                        name="confirmResetPassword"
+                        onChange={(e) => handleInputChange(e)}
+                      />
+                      <span style={{ color: "red" }}>{formErrors}</span>
+                    </div>
                   </div>
                 </div>
-              </div>
-            </form>
-          </div>
-          <div className="modal-footer">
-            <button
-              type="button"
-              className="btn btn-secondary"
-              data-bs-dismiss="modal"
-              ref={closeResetPassword}
-              onClick={closeModalEvent}
-            >
-              CANCEL
-            </button>
-            <button
-              type="button"
-              className="btn btn-outline-success"
-              onClick={resetPassword}
-            >
-              SAVE
-            </button>
+              </form>
+            </div>
+            <div className="modal-footer">
+              <button
+                type="button"
+                className="btn btn-secondary"
+                data-bs-dismiss="modal"
+                ref={closeResetPassword}
+                onClick={closeModalEvent}
+              >
+                CANCEL
+              </button>
+              <button
+                type="button"
+                className="btn btn-outline-success"
+                onClick={resetPassword}
+              >
+                SAVE
+              </button>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </Box>
   );
 };
 

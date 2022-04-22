@@ -6,6 +6,7 @@ import { AgGridReact } from "ag-grid-react";
 import { isNotEmpty } from "@utils/valid";
 import ActionRenderer from "@pages/settings/users/UserListActionRenderer";
 import DeleteUserModal from "@pages/settings/users/DeleteUserModal";
+import { Container, Box } from "@mui/material";
 
 const gridOptions = {
   // PROPERTIES
@@ -80,8 +81,8 @@ const UserList = (props: any) => {
       });
   };
   return (
-    <div>
-      <div className="container">
+    <Box sx={{ pt: 8.5 }}>
+      <Container>
         <div className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
           <div className="row align-items-start">
             <div className="input-group">
@@ -89,13 +90,13 @@ const UserList = (props: any) => {
             </div>
           </div>
           <div className="row align-items-end">
-            <Link to="/users/add" className="btn btn-success">
+            <Link to="/security/user/add" className="btn btn-success">
               + Add User
             </Link>
           </div>
         </div>
-      </div>
-      <div className="container">
+      </Container>
+      <Container>
         {/* <!-- Grid Area --> */}
         <div className="container-fluid">
           <div
@@ -113,10 +114,10 @@ const UserList = (props: any) => {
             />
           </div>
         </div>
-      </div>
+      </Container>
       {/* <!-- Modal --> */}
       <DeleteUserModal username={username} searchUserList={searchUserList} />
-    </div>
+    </Box>
   );
 };
 

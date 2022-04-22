@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect, MouseEvent } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch, RootStateOrAny } from "react-redux";
 import { ReducerType, resetStore, initStore } from "@modules/index";
 import { Button, IconButton } from "@mui/material";
@@ -8,12 +8,14 @@ import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import Divider from "@mui/material/Divider";
 import Box from "@mui/material/Box";
+import { Security } from "@mui/icons-material";
 
 interface Props {
   signinYn: boolean;
 }
 const SigninBlock: React.FC<Props> = (props) => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   // Description: 로그인 후 개인 메뉴 기능 (아이콘 드랍다운 메뉴)
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -22,6 +24,14 @@ const SigninBlock: React.FC<Props> = (props) => {
     setAnchorEl(event.currentTarget);
   };
   const handleClose = () => {
+    setAnchorEl(null);
+  };
+  const moveSecurityMenu = (param:String) => {
+    navigate("/security/" + param + "/list");    // eg. "/security/user/list"
+    setAnchorEl(null);
+  };
+  const myProfile = () => {
+    navigate("/user/profile/userinfo");
     setAnchorEl(null);
   };
 
@@ -59,14 +69,14 @@ const SigninBlock: React.FC<Props> = (props) => {
           <Box component="span" m={1} color={"teal"}>
             Security
           </Box>
-          <MenuItem onClick={handleClose}>Users</MenuItem>
-          <MenuItem onClick={handleClose}>Roles</MenuItem>
+          <MenuItem onClick={() => moveSecurityMenu("user")}>Users</MenuItem>
+          <MenuItem onClick={() => moveSecurityMenu("role")}>Roles</MenuItem>
           <Divider />
           <Box component="span" m={1} color={"teal"}>
             User
           </Box>
-          <MenuItem onClick={handleClose}>My account</MenuItem>
-          <MenuItem onClick={() => signout()}>Signout</MenuItem>
+          <MenuItem onClick={myProfile}>My Profile</MenuItem>
+          <MenuItem onClick={signout}>Signout</MenuItem>
         </Menu>
       </div>
     );

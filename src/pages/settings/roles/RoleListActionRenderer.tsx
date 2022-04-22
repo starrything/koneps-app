@@ -19,7 +19,7 @@ export default (props: any) => {
         <button
           type="button"
           className="btn btn-outline-secondary btn-sm"
-          onClick={() => navigate("/roles/edit/" + props.data.role)}
+          onClick={() => navigate("/security/role/edit/" + props.data.role)}
         >
           <i className="bi bi-pencil"></i>
           <span className="visually-hidden">Button</span>

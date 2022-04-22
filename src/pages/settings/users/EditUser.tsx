@@ -5,6 +5,7 @@ import axiosConfig from "@utils/axiosConfig";
 import AsyncSelect from "react-select/async";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
+import { Container, Box } from "@mui/material";
 
 const MySwal = withReactContent(Swal);
 
@@ -50,7 +51,7 @@ const EditUser = (props: any) => {
     password,
     confirmPassword,
   } = userinfo;
-  let roleCodeList = useSelector((state: RootStateOrAny) => state.actionOfSettings.roleCodeList);
+  let roleCodeList = useSelector((state: RootStateOrAny) => state.actionOfCode.roleList);
   const [roleList, setRoleList] = useState(roleCodeList);
   const [passwordError, setPasswordError] = useState("");
   const [isChecked, setIsChecked] = useState(false);
@@ -265,15 +266,15 @@ const EditUser = (props: any) => {
   };
 
   return (
-    <div>
-      <div className="container">
+    <Box sx={{ pt: 8.5 }}>
+      <Container>
         <div className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
           <div className="row align-items-start">
             <div className="input-group">Edit User</div>
           </div>
         </div>
-      </div>
-      <div className="container">
+      </Container>
+      <Container>
         <table className="table table-bordered">
           <tbody>
             <tr>
@@ -385,11 +386,11 @@ const EditUser = (props: any) => {
             </tr>
           </tbody>
         </table>
-      </div>
-      <div className="container">
+      </Container>
+      <Container>
         <div className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom"></div>
-      </div>
-      <div className="container">
+      </Container>
+      <Container>
         <form className="d-flex">
           <div style={{ display: "inline-block", paddingRight: "5px" }}>
             <button
@@ -401,8 +402,8 @@ const EditUser = (props: any) => {
             </button>
           </div>
         </form>
-      </div>
-    </div>
+      </Container>
+    </Box>
   );
 };
 

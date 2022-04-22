@@ -24,13 +24,13 @@ const Router = (props: any) => {
     <Routes>
       <Route path="/" element={<Mainpage />} />
       <Route path="/login" element={ <Signin />} />
-      <Route path="/users/list" element={<UserList />} />
-      <Route path="/users/add" element={<AddUser />} />
-      <Route path="/users/edit/:userId" element={<EditUser />} />
-      <Route path="/roles/list" element={<RoleList />} />
-      <Route path="/roles/edit/:role" element={<EditRole />} />
-      <Route path="/users/profile/userinfo" element={<UserProfile />} />
-      <Route path="/users/profile/edit" element={<EditUserProfile />} />
+      <Route path="/security/user/list" element={<UserList />} />
+      <Route path="/security/user/add" element={<AddUser />} />
+      <Route path="/security/user/edit/:userId" element={<EditUser />} />
+      <Route path="/security/role/list" element={<RoleList />} />
+      <Route path="/security/role/edit/:role" element={<EditRole />} />
+      <Route path="/user/profile/userinfo" element={<UserProfile />} />
+      <Route path="/user/profile/edit" element={<EditUserProfile />} />
       <Route path="/signup" element={<Signup />} />
       <Route path="/overview" element={<Overview />} />
       <Route path="/beforespec/list" element={<BeforeSpecList />}/>
