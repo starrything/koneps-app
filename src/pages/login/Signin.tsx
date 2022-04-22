@@ -9,9 +9,11 @@ import { createTheme, ThemeProvider, styled } from "@mui/material/styles";
 import { purple } from '@mui/material/colors';
 import withReactContent from "sweetalert2-react-content";
 import Swal from "sweetalert2";
-
 import "@styles/App.css";
 import "@styles/signin.css";
+
+// TODO: 1. 자동 로그인
+// TODO: 2. 비밀번호 찾기
 
 interface LoginInfo {
   loginId: string;
@@ -43,11 +45,27 @@ const theme = createTheme();
 
 const Login = (props: any) => {
   const dispatch = useDispatch();
-  let intFrameHeight = window.innerHeight - 56;
   const navigate = useNavigate();
 
-  const loginUserName = useRef<HTMLInputElement>(null);
-  const loginUserPassword = useRef<HTMLInputElement>(null);
+  const [userinfo, setUserinfo] = useState({
+    email: "",
+    password: "",
+  });
+  const { email, password } = userinfo;
+
+  const handleInputChange = (event: any) => {
+    const { name, value } = event.target;
+    let formValue = value;
+
+    const nextUserinfo = {
+      //스프레드 문법으로 기존의 객체를 복사한다.
+      ...userinfo,
+      [name]: formValue,
+    };
+    //만든 변수를 seInput으로 변경해준다.
+    setUserinfo(nextUserinfo);
+  };
+
   const loginSubmit = useRef<HTMLButtonElement>(null);
 
   const goLogin = () => {
@@ -61,20 +79,6 @@ const Login = (props: any) => {
     // console.log(session.getCookie("session"));
     //navigate("/");
 
-    let username = "";
-    let email = "";
-    if (loginUserName.current !== null) {
-      let idx = loginUserName.current.value.indexOf("@");
-      username = loginUserName.current.value.substring(0, idx);
-
-      email = loginUserName.current.value;
-    }
-    let password = "";
-    if (loginUserPassword.current !== null) {
-      password = loginUserPassword.current.value;
-    }
-    console.log("username: " + username);
-    console.log("password: " + password);
     axiosConfig
       .post("/login", {
         email: email,
@@ -129,9 +133,15 @@ const Login = (props: any) => {
       })
       .catch(function (error) {
         // error
+        let text = "";
+        if(error.response.status === 401) {
+          text = "비밀번호를 다시 확인해주세요.";
+        }
+
         MySwal.fire({
           icon: "error",
-          text: "로그인에 실패하였습니다.",
+          title: "로그인에 실패하였습니다.",
+          text: text,
         });
       })
       .then(function () {
@@ -144,6 +154,7 @@ const Login = (props: any) => {
       loginSubmit.current?.click();
     }
   };
+
   return (
     <ThemeProvider theme={theme}>
       <Container component="main" maxWidth="xs" sx={{ pt: 8.5, pb: 6, textAlign: "left" }}>
@@ -177,16 +188,19 @@ const Login = (props: any) => {
                   autoComplete="email"
                   placeholder="이메일을 입력하세요"
                   type="email"
-                  ref={loginUserName} />
+                  onChange={handleInputChange}
+                />
               </Grid>
               <Grid item xs={12}>
                 <TextField required
                   fullWidth
                   id="password"
                   label="password"
+                  name="password"
                   placeholder="비밀번호를 입력하세요"
                   type="password"
-                  ref={loginUserPassword}
+                  onChange={handleInputChange}
+                  onKeyDown={handleKeyPress}
                 />
               </Grid>
               <Grid item xs={12}>
