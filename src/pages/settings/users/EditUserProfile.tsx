@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch, RootStateOrAny } from "react-redux";
+import * as session from "@modules/user/session";
 import axiosConfig from "@utils/axiosConfig";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
@@ -9,24 +10,27 @@ import { Box, Breadcrumbs, Container, Link, Typography } from "@mui/material";
 const MySwal = withReactContent(Swal);
 
 interface userinfo {
+  loginId: string,
   firstName: string,
   lastName: string,
   tel: string,
   email: string,
   address1: string,
-  address2: string
+  address2: string,
 }
 const EditUserProfile = (props: any) => {
   const navigate = useNavigate();
-  const user = useSelector((state: RootStateOrAny) => state.session.loginInfo);
+  const dispatch = useDispatch();
+  const loginInfo = useSelector((state: RootStateOrAny) => state.session.loginInfo);
 
   const [userinfo, setUserinfo] = useState<userinfo>({
-    firstName: user.firstName,
-    lastName: user.lastName,
-    tel: user.tel,
-    email: user.email,
-    address1: user.address1,
-    address2: user.address2,
+    loginId: loginInfo.loginId,
+    firstName: loginInfo.firstName,
+    lastName: loginInfo.lastName,
+    tel: loginInfo.tel,
+    email: loginInfo.email,
+    address1: loginInfo.address1,
+    address2: loginInfo.address2,
   });
   const { firstName, lastName, tel, email, address1, address2 } = userinfo;
 
@@ -75,6 +79,21 @@ const EditUserProfile = (props: any) => {
     })
       .then(function (response) {
         // success
+        // 1. redux store
+        loginInfo.firstName = firstName;
+        loginInfo.lastName = lastName;
+        loginInfo.tel = tel;
+        loginInfo.email = email;
+        loginInfo.address1 = address1;
+        loginInfo.address2 = address2;
+        dispatch(session.setLoginInfo(loginInfo));
+
+        // 2. browser Local storage
+        global.localStorage.setItem(
+          "loginInfo",
+          JSON.stringify(loginInfo)
+        );
+
         MySwal.fire({
           icon: "success",
           text: "Success!",

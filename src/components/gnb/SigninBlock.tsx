@@ -26,7 +26,7 @@ const SigninBlock: React.FC<Props> = (props) => {
   const handleClose = () => {
     setAnchorEl(null);
   };
-  const moveSecurityMenu = (param:String) => {
+  const moveSecurityMenu = (param:string) => {
     navigate("/security/" + param + "/list");    // eg. "/security/user/list"
     setAnchorEl(null);
   };

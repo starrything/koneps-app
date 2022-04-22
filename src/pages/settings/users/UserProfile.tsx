@@ -18,6 +18,7 @@ const UserProfile = (props: any) => {
     email,
     address1,
     address2,
+    authorities,
   } = user;
   var regex = /[^0-9]/g;
   const [userInfo, setUserInfo] = useState({
@@ -75,7 +76,7 @@ const UserProfile = (props: any) => {
           </div>
         </div>
       </Container>
-      <Container>
+      <Container sx={{textAlign: "left"}}>
         <table className="table table-bordered">
           <tbody>
             <tr>
@@ -103,7 +104,7 @@ const UserProfile = (props: any) => {
           </div>
         </div>
       </Container>
-      <Container>
+      <Container sx={{textAlign: "left"}}>
         <table className="table table-bordered">
           <tbody>
             <tr>
