@@ -34,7 +34,7 @@ export default (props: { value: string | URL | undefined; }) => {
             className="btn btn-outline-secondary btn-sm"
             onClick={() => downloadSpecDoc()}
           >
-            <i className="bi bi-file-earmark-text"></i>
+            <i className="bi bi-box-arrow-up-right"></i>
             <span className="visually-hidden">Button</span>
           </button>
         </OverlayTrigger>

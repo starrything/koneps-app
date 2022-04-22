@@ -5,6 +5,7 @@ import axiosConfig from "@utils/axiosConfig";
 import { AgGridReact, AgGridColumn } from "ag-grid-react";
 import { ColDef, CellClickedEvent } from "ag-grid-community";
 import ActionRenderer1 from "@pages/beforespec/BeforeSpecActionRenderer1";
+import ActionRenderer2 from "@pages/beforespec/BeforeSpecActionRenderer2";
 import { currencyFormatter } from "@src/utils/formatter";
 import { Container, Box, Breadcrumbs, Link, Typography } from "@mui/material";
 
@@ -42,19 +43,8 @@ const columnDefs: ColDef[] = [
   { headerName: "수요기관명", field: "rlDminsttNm", sortable: true },
   { headerName: "납품기한일시", field: "dlvrTmlmtDt", sortable: true },
   { headerName: "납품일수", field: "dlvrDaynum", width: 150, sortable: true },
-  {
-    headerName: "규격문서1",
-    field: "specDocFileUrl1",
-    width: 120,
-    sortable: true,
-    cellRenderer: "ActionRenderer1"
-  },
-  {
-    headerName: "규격문서2",
-    field: "specDocFileUrl2",
-    width: 120,
-    sortable: true,
-  },
+  { headerName: "규격문서1", field: "specDocFileUrl1", width: 120, sortable: true, cellRenderer: "ActionRenderer1" },
+  { headerName: "규격문서2", field: "specDocFileUrl2", width: 120, sortable: true, cellRenderer: "ActionRenderer2" },
 ];
 
 const BeforeSpec = (props: any) => {
@@ -173,7 +163,7 @@ const BeforeSpec = (props: any) => {
             columnDefs={columnDefs}
             gridOptions={gridOptions}
             defaultColDef={{ resizable: true }}
-            frameworkComponents={{ ActionRenderer1 }}
+            frameworkComponents={{ ActionRenderer1, ActionRenderer2 }}
             onCellClicked={(params) => onCellClicked(params)}
           //onCellDoubleClicked={(params) => onCellDoubleClicked(params)}
           >
