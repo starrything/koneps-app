@@ -42,6 +42,7 @@ const SigninBlock: React.FC<Props> = (props) => {
     global.localStorage.clear();
 
     handleClose();
+    navigate("/");
   };
 
   if (props.signinYn) {

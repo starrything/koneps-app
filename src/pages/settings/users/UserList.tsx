@@ -41,6 +41,9 @@ const columnDefs = [
 
 const UserList = (props: any) => {
   let nvigate = useNavigate();
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
   const [rowData, setRowData] = useState([]);
   const [searchKeyword, setSearchKeyword] = useState("");
   const [username, setUsername] = useState("");
@@ -111,12 +114,13 @@ const UserList = (props: any) => {
               frameworkComponents={{ ActionRenderer }}
               onCellClicked={(params) => onCellClicked(params)}
               onCellDoubleClicked={(params) => onCellDoubleClicked(params)}
+              context={{handleOpen}}
             />
           </div>
         </div>
       </Container>
       {/* <!-- Modal --> */}
-      <DeleteUserModal username={username} searchUserList={searchUserList} />
+      <DeleteUserModal username={username} searchUserList={searchUserList} open={open} handleClose={handleClose} />
     </Box>
   );
 };

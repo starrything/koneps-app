@@ -7,6 +7,9 @@ import { Box, Breadcrumbs, Container, Link, Typography } from "@mui/material";
 
 const UserProfile = (props: any) => {
   const nvigate = useNavigate();
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
   const user = useSelector((state: RootStateOrAny) => state.session.loginInfo);
   const [roles, setRoles] = useState("");
   const {
@@ -151,8 +154,9 @@ const UserProfile = (props: any) => {
             <button
               className="btn btn-success"
               type="button"
-              data-bs-toggle="modal"
-              data-bs-target="#ResetPasswordModal"
+              // data-bs-toggle="modal"
+              // data-bs-target="#ResetPasswordModal"
+              onClick={handleOpen}
             >
               Reset my password
             </button>
@@ -169,7 +173,7 @@ const UserProfile = (props: any) => {
         </form>
       </Container>
       {/* <!-- Modal --> */}
-      <ResetPasswordModal />
+      <ResetPasswordModal open={open} handleClose={handleClose} />
     </Box>
   );
 };

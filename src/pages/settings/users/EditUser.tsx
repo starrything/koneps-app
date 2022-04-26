@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { useSelector, useDispatch, RootStateOrAny } from "react-redux";
 import axiosConfig from "@utils/axiosConfig";
@@ -58,13 +58,13 @@ const EditUser = (props: any) => {
 
   useEffect(() => {
     //let { username } = useParams();
-    console.log("Edit user: " + userId);
+    //console.log("Edit user: " + userId);
     getUserDetails(userId);
 
-    if (!isActive) {
-      setIsChecked(false);
-    } else {
+    if (isActive) {
       setIsChecked(true);
+    } else {
+      setIsChecked(false);
     }
   }, []);
 
@@ -125,8 +125,9 @@ const EditUser = (props: any) => {
     let formValue = value;
 
     if (name === "isActive") {
-      formValue = value === "false" ? true : false;
-      if (value === "false") {
+      let checked = event.target.checked;
+      formValue = checked;
+      if (checked) {
         setIsChecked(true);
       } else {
         setIsChecked(false);
@@ -147,7 +148,6 @@ const EditUser = (props: any) => {
         formValue =
           temp.substr(0, 3) + "-" + temp.substr(3, 4) + "-" + temp.substr(7, 4);
       }
-      //console.log("tel. length: " + formValue.replace(regex, "").length);
     }
 
     if (name === "password" || name === "confirmPassword") {
@@ -230,9 +230,9 @@ const EditUser = (props: any) => {
       return;
     }
     let selectedRoles = [];
-    selectedRoles = roles.length === 0 ? ["USER"] : roles;
+    selectedRoles = roles.length === 0 ? ["USER"] : Array.from(roles.map((map: { value: string; }) => map.value));
 
-    let convertIsActive = isActive === false ? 0 : 1;
+    let convertIsActive = isActive === true ? 1 : 0;
 
     axiosConfig.put("/api/v1/user", {
       firstName: firstName,
@@ -249,7 +249,8 @@ const EditUser = (props: any) => {
         // success
         MySwal.fire({
           icon: "success",
-          text: "Success!",
+          title: "Success",
+          text: "Success to update the User information.",
         });
       })
       .catch(function (error) {
@@ -257,7 +258,8 @@ const EditUser = (props: any) => {
         //alert("Failed to save this Dataset.");
         MySwal.fire({
           icon: "error",
-          text: "Failed to update the user information.",
+          title: "Error",
+          text: "Failed to update the User information.",
         });
       })
       .then(function () {
@@ -274,7 +276,7 @@ const EditUser = (props: any) => {
           </div>
         </div>
       </Container>
-      <Container>
+      <Container sx={{textAlign: "left"}}>
         <table className="table table-bordered">
           <tbody>
             <tr>

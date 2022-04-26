@@ -146,7 +146,7 @@ const EditRole = (props: any) => {
           </div>
         </div>
       </Container>
-      <Container>
+      <Container sx={{textAlign: "left"}}>
         <table className="table table-bordered">
           <tbody>
             <tr>

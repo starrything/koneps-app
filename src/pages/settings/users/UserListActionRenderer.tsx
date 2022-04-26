@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import "bootstrap-icons/font/bootstrap-icons.css";
 
 export default (props: any) => {
+  //console.log(props.context);
   const navigate = useNavigate();
   return (
     <div>
@@ -11,8 +12,9 @@ export default (props: any) => {
         <button
           type="button"
           className="btn btn-outline-secondary btn-sm"
-          data-bs-toggle="modal"
-          data-bs-target="#deleteUserModal"
+          onClick={props.context.handleOpen}
+          //data-bs-toggle="modal"
+          //data-bs-target="#deleteUserModal"
         >
           <i className="bi bi-trash"></i>
         </button>

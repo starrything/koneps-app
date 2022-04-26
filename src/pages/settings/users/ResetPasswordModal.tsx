@@ -3,14 +3,25 @@ import axiosConfig from "@utils/axiosConfig";
 import { isEmpty } from "@utils/valid";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
-import { Box } from "@mui/material";
+import { Box, Modal, Typography } from "@mui/material";
 
 const MySwal = withReactContent(Swal);
+
+const style = {
+  position: 'absolute' as 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: 400,
+  bgcolor: 'background.paper',
+  border: '2px solid #000',
+  boxShadow: 24,
+  p: 4,
+};
 const ResetPasswordModal = (props: any) => {
   const modalForm = useRef<HTMLFormElement>(null);
   const closeResetPassword = useRef<HTMLButtonElement>(null);
 
-  const [passwordForm, setPasswordForm] = useState({ fields: {}, errors: {} });
   const [formFields, setFormFields] = useState({
     resetPassword: "",
     confirmResetPassword: "",
@@ -20,11 +31,9 @@ const ResetPasswordModal = (props: any) => {
   const resetPassword = () => {
     let fields = formFields;
     if (fields["resetPassword"] !== fields["confirmResetPassword"]) {
-      //errors["confirmResetPassword"] = "Passwords must match";
       setFormErrors("Passwords must match");
       return;
     } else if (fields["resetPassword"] === fields["confirmResetPassword"]) {
-      //errors["confirmResetPassword"] = "";
       setFormErrors("");
     }
 
@@ -44,7 +53,8 @@ const ResetPasswordModal = (props: any) => {
         // success
         MySwal.fire({
           icon: "success",
-          text: "sucess",
+          title: "Success",
+          text: "성공적으로 변경되었습니다.",
         });
         closeResetPassword.current?.click();
       })
@@ -57,110 +67,99 @@ const ResetPasswordModal = (props: any) => {
   };
 
   const handleInputChange = (event: any) => {
-    let fields = formFields;
-    let errors = formErrors;
+    const { name, value } = event.target;
 
-    const target = event.target;
-    const name = target.name;
-
-    if (
-      name === "confirmResetPassword" &&
-      fields["resetPassword"] !== target.value
-    ) {
-      setFormErrors("Passwords must match");
-    } else if (
-      name === "confirmResetPassword" &&
-      fields["resetPassword"] === target.value
-    ) {
-      setFormErrors("");
+    if (name === "resetPassword") {
+      if(value !== formFields["confirmResetPassword"]) {
+        setFormErrors("Passwords must match");
+      } else {
+        setFormErrors("");
+      }      
+    } else if (name === "confirmResetPassword") {
+      if(value !== formFields["resetPassword"]) {
+        setFormErrors("Passwords must match");
+      } else {
+        setFormErrors("");
+      }
     }
-    console.log(fields);
-    console.log(errors);
-    setFormFields(fields);
+
+    const nextFormFields = {
+      ...formFields,
+      [name]: value,
+    }
+    setFormFields(nextFormFields);
   };
 
   const closeModalEvent = () => {
     setFormFields({ resetPassword: "", confirmResetPassword: "" });
     setFormErrors("");
     modalForm.current?.reset();
+    props.handleClose();
   };
   return (
-    <Box sx={{ pt: 8.5 }}>
-      <div
-        className="modal fade"
-        id="ResetPasswordModal"
-        //tabIndex="-1"
-        aria-labelledby="ResetPasswordModalLabel"
-        aria-hidden="true"
-      >
-        <div className="modal-dialog modal-lg">
-          <div className="modal-content">
-            <div className="modal-header">
-              <h5 className="modal-title" id="ResetPasswordModalLabel">
-                Reset My Password
-              </h5>
-              <button
-                type="button"
-                className="btn-close"
-                data-bs-dismiss="modal"
-                aria-label="Close"
-              ></button>
-            </div>
-            <div className="modal-body">
-              <form ref={modalForm}>
-                <div className="mb-3">
-                  Password*
-                  <div className="row">
-                    <div className="col">
-                      <input
-                        type="text"
-                        className="form-control"
-                        id="resetPassword"
-                        name="resetPassword"
-                        onChange={(e) => handleInputChange(e)}
-                      />
-                    </div>
-                  </div>
+    <Modal
+      open={props.open}
+      onClose={closeModalEvent}
+      aria-labelledby="modal-modal-title"
+      aria-describedby="modal-modal-description"
+    >
+      <Box sx={style}>
+        <Typography id="modal-modal-title" variant="h6" component="h2">
+          Reset My Password
+        </Typography>
+        <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+          <form ref={modalForm}>
+            <div className="mb-3">
+              Password*
+              <div className="row">
+                <div className="col">
+                  <input
+                    type="text"
+                    className="form-control"
+                    id="resetPassword"
+                    name="resetPassword"
+                    onChange={(e) => handleInputChange(e)}
+                  />
                 </div>
-                <div className="mb-3">
-                  Confirm Password
-                  <div className="row">
-                    <div className="col">
-                      <input
-                        type="text"
-                        className="form-control"
-                        id="confirmResetPassword"
-                        name="confirmResetPassword"
-                        onChange={(e) => handleInputChange(e)}
-                      />
-                      <span style={{ color: "red" }}>{formErrors}</span>
-                    </div>
-                  </div>
+              </div>
+            </div>
+            <div className="mb-3">
+              Confirm Password
+              <div className="row">
+                <div className="col">
+                  <input
+                    type="text"
+                    className="form-control"
+                    id="confirmResetPassword"
+                    name="confirmResetPassword"
+                    onChange={(e) => handleInputChange(e)}
+                  />
+                  <span style={{ color: "red" }}>{formErrors}</span>
                 </div>
-              </form>
+              </div>
             </div>
-            <div className="modal-footer">
-              <button
-                type="button"
-                className="btn btn-secondary"
-                data-bs-dismiss="modal"
-                ref={closeResetPassword}
-                onClick={closeModalEvent}
-              >
-                CANCEL
-              </button>
-              <button
-                type="button"
-                className="btn btn-outline-success"
-                onClick={resetPassword}
-              >
-                SAVE
-              </button>
-            </div>
+          </form>
+          <div className="modal-footer">
+            <button
+              type="button"
+              className="btn btn-outline-success"
+              onClick={resetPassword}
+            >
+              SAVE
+            </button>
+            <button
+              type="button"
+              className="btn btn-secondary"
+              //data-bs-dismiss="modal"
+              ref={closeResetPassword}
+              onClick={closeModalEvent}
+            >
+              CANCEL
+            </button>
           </div>
-        </div>
-      </div>
-    </Box>
+        </Typography>
+      </Box>
+    </Modal>
   );
 };
 

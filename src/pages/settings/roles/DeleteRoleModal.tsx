@@ -2,14 +2,22 @@ import React, { useState, useRef } from "react";
 import axiosConfig from "@utils/axiosConfig";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
+import { Box, Modal, Typography } from "@mui/material";
 
 const MySwal = withReactContent(Swal);
 
+const style = {
+  position: 'absolute' as 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: 400,
+  bgcolor: 'background.paper',
+  border: '2px solid #000',
+  boxShadow: 24,
+  p: 4,
+};
 const DeleteRoleModal = (props: any) => {
-  const [delBtnClassName, setDelBtnClassName] = useState(
-    "btn btn-danger"
-  );
-
   const delRoleModalCloseBtn = useRef<HTMLButtonElement>(null);
   const delButton = useRef<HTMLButtonElement>(null);
 
@@ -24,16 +32,24 @@ const DeleteRoleModal = (props: any) => {
     })
       .then(function (response) {
         // success
+        MySwal.fire({
+          icon: "success",
+          title: "Success",
+          text: "Success to delete this Role.",
+        });
         delRoleModalCloseBtn.current?.click();
         searchRoleList();
+        props.handleClose();
       })
       .catch(function (error) {
         // error
         //alert("Failed to delete this Role.");
         MySwal.fire({
           icon: "error",
+          title: "Error",
           text: "Failed to delete this Role.",
         });
+        props.handleClose();
       })
       .then(function () {
         // finally
@@ -41,46 +57,43 @@ const DeleteRoleModal = (props: any) => {
   };
 
   return (
-    <div
-      className="modal fade"
-      id="deleteRoleModal"
-      //tabIndex="-1"
-      aria-labelledby="deleteRoleModalLabel"
-      aria-hidden="true"
+    <Modal
+      open={props.open}
+      onClose={props.handleClose}
+      aria-labelledby="modal-modal-title"
+      aria-describedby="modal-modal-description"
     >
-      <div className="modal-dialog modal-sm">
-        <div className="modal-content">
-          <div className="modal-header">
-            <h5 className="modal-title" id="deleteRoleModalLabel">
-              User confirmation needed
-            </h5>
-          </div>
+      <Box sx={style}>
+        <Typography id="modal-modal-title" variant="h6" component="h2">
+          User confirmation needed
+        </Typography>
+        <Typography id="modal-modal-description" sx={{ mt: 2 }}>
           <div className="modal-body">
             You sure you want to delete this item?
           </div>
           <div className="modal-footer">
             <button
               type="button"
-              className="btn btn-secondary"
-              data-bs-dismiss="modal"
-              ref={delRoleModalCloseBtn}
-            >
-              CANCEL
-            </button>
-            <button
-              type="button"
-              className={delBtnClassName}
-              id="delete-role"
-              name="delete-role"
+              className="btn btn-danger"
+              id="delete-user"
+              name="delete-user"
               onClick={deleteRole}
-              ref={delButton}
             >
               OK
             </button>
+            <button
+              type="button"
+              className="btn btn-secondary"
+              //data-bs-dismiss="modal"
+              ref={delRoleModalCloseBtn}
+              onClick={props.handleClose}
+            >
+              CANCEL
+            </button>
           </div>
-        </div>
-      </div>
-    </div>
+        </Typography>
+      </Box>
+    </Modal>
   );
 };
 

@@ -29,6 +29,9 @@ const columnDefs = [
 
 const RoleList = (props: any) => {
   let navigate = useNavigate();
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
   const [rowData, setRowData] = useState([]);
   const [searchKeyword, setSearchKeyword] = useState("");
   const [role, setRole] = useState("");
@@ -98,12 +101,13 @@ const RoleList = (props: any) => {
               frameworkComponents={{ ActionRenderer }}
               onCellClicked={(params) => onCellClicked(params)}
               onCellDoubleClicked={(params) => onCellDoubleClicked(params)}
+              context={{handleOpen}}
             />
           </div>
         </div>
       </Container>
       {/* <!-- Modal --> */}
-      <DeleteRoleModal role={role} searchRoleList={searchRoleList} />
+      <DeleteRoleModal role={role} searchRoleList={searchRoleList} open={open} handleClose={handleClose} />
     </Box>
   );
 };

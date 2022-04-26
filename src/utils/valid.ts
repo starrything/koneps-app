@@ -21,7 +21,7 @@ export const isValidSession = () => {
 
   const sessionTimeOut: number = 0;
   if (isNotEmpty(lastAccessTime)) {
-    console.log("Login User");
+    //console.log("Login User");
     // login User
     if (currentTime - lastAccessTime < sessionTimeOut) {
       // unit: Millisecond

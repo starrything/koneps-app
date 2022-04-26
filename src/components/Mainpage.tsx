@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import * as actionOfCode from "@src/modules/system/actionOfCode";
 import * as actionOfUser from "@modules/user/actionOfUser";
+import * as session from "@modules/user/session";
 import axiosConfig from "@utils/axiosConfig";
 import { SessionContext } from "@utils/cookies";
 import { Container, Box, Divider, Grid, Paper } from "@mui/material";
@@ -10,7 +11,14 @@ import { Container, Box, Divider, Grid, Paper } from "@mui/material";
 const Main = (props: any) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const cookieSession = useContext(SessionContext);
+  const cookieSession = useContext(SessionContext);//이벤트 팝업용
+  const currentUserInfo = global.localStorage.getItem("loginInfo");
+  let loginInfo = {};
+  
+  if(typeof currentUserInfo === "string") {
+    let loginInfo = JSON.parse(currentUserInfo);
+    dispatch(session.setLoginInfo(loginInfo));
+  }
 
   useEffect(() => {
     //TODO:
