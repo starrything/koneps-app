@@ -116,7 +116,7 @@ const Gnb = (props: any) => {
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: "none", md: "flex" } }}>
             <Button
-              sx={{ my: 2, color: "white", display: "block" }}
+              sx={{ my: 2, color: "white", display: "block", textTransform: "none" }}
               component={Link}
               to={"/overview"}
               onClick={scrollToTop}
@@ -140,7 +140,7 @@ const Gnb = (props: any) => {
               공고현황
             </Button>
             <Button
-              sx={{ my: 2, color: "white", display: "block" }}
+              sx={{ my: 2, color: "white", display: "block", textTransform: "none" }}
               component={Link}
               to={"/meetup/list"}
               onClick={scrollToTop}
@@ -148,12 +148,12 @@ const Gnb = (props: any) => {
               MeetUp
             </Button>
             <Button
-              sx={{ my: 2, color: "white", display: "block" }}
+              sx={{ my: 2, color: "white", display: "block", textTransform: "none" }}
               component={Link}
               to={"/bookmark/list"}
               onClick={scrollToTop}
             >
-              Bookmark
+              Bookmarks
             </Button>
             <SigninBlock signinYn={signinYn} />
           </Box>
