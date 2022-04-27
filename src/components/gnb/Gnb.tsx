@@ -16,6 +16,7 @@ import {
 } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import SigninBlock from "@components/gnb/SigninBlock";
+import { scrollToTop } from "@utils/util";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -118,6 +119,7 @@ const Gnb = (props: any) => {
               sx={{ my: 2, color: "white", display: "block" }}
               component={Link}
               to={"/overview"}
+              onClick={scrollToTop}
             >
               Overview
             </Button>
@@ -125,6 +127,7 @@ const Gnb = (props: any) => {
               sx={{ my: 2, color: "white", display: "block" }}
               component={Link}
               to={"/beforespec/list"}
+              onClick={scrollToTop}
             >
               사전규격
             </Button>
@@ -132,6 +135,7 @@ const Gnb = (props: any) => {
               sx={{ my: 2, color: "white", display: "block" }}
               component={Link}
               to={"/bidnotice/list"}
+              onClick={scrollToTop}
             >
               공고현황
             </Button>
@@ -139,6 +143,7 @@ const Gnb = (props: any) => {
               sx={{ my: 2, color: "white", display: "block" }}
               component={Link}
               to={"/meetup/list"}
+              onClick={scrollToTop}
             >
               MeetUp
             </Button>
@@ -146,6 +151,7 @@ const Gnb = (props: any) => {
               sx={{ my: 2, color: "white", display: "block" }}
               component={Link}
               to={"/bookmark/list"}
+              onClick={scrollToTop}
             >
               Bookmark
             </Button>

@@ -31,6 +31,7 @@ const columnDefs: ColDef[] = [
     headerName: "입찰공고명",
     field: "bidNtceNm",
     width: 400,
+    cellStyle: {textAlign: 'left'},
     sortable: true,
   },
   {
@@ -39,14 +40,14 @@ const columnDefs: ColDef[] = [
     sortable: true,
     hide: true,
   },
-  { headerName: "공고기관명", field: "ntceInsttNM", sortable: true },
+  { headerName: "공고기관명", field: "ntceInsttNM", cellStyle: {textAlign: 'left'}, sortable: true },
   {
     headerName: "수요기관코드",
     field: "dminsttCd",
     sortable: true,
     hide: true,
   },
-  { headerName: "수요기관명", field: "dminsttNm", sortable: true },
+  { headerName: "수요기관명", field: "dminsttNm", cellStyle: {textAlign: 'left'}, sortable: true },
   {
     headerName: "예산금액",
     field: "asignBdgtAmt",
@@ -64,10 +65,10 @@ const columnDefs: ColDef[] = [
     sortable: true,
   },
   { headerName: "입찰방식", field: "bidMethdNm", width: 150, sortable: true },
-  { headerName: "계약체결방법", field: "cntrctCnclsMthdNm", sortable: true },
+  { headerName: "계약체결방법", field: "cntrctCnclsMthdNm", cellStyle: {textAlign: 'left'}, sortable: true },
   { headerName: "입찰마감일시", field: "bidClseDt", sortable: true },
   { headerName: "개찰일시", field: "opengDt", sortable: true },
-  { headerName: "낙찰방법", field: "sucsfbidMthdNm", sortable: true },
+  { headerName: "낙찰방법", field: "sucsfbidMthdNm", cellStyle: {textAlign: 'left'}, sortable: true },
   { headerName: "등록일시", field: "rgstDt", sortable: true },
   { headerName: "공고규격서1", field: "ntceSpecDocUrl1", width: 120, cellClass: "ag-middle-aligned-cell", cellRenderer: "ActionRenderer1" },
   { headerName: "공고규격파일명1", field: "ntceSpecFileNm1", hide: true },
@@ -139,6 +140,12 @@ const BidNotice = (props: any) => {
       });
   };
 
+  const handleKeyPress = (event: any) => {
+    if (event.key === "Enter") {
+      searchBidNoticeList();
+    }
+  };
+
   return (
     <Box sx={{ pt: 8.5 }}>
       <nav
@@ -180,6 +187,7 @@ const BidNotice = (props: any) => {
                 onChange={(e) => {
                   setSearchKeyword(e.target.value);
                 }}
+                onKeyDown={handleKeyPress}
               />
               <button
                 className="btn btn-outline-secondary"

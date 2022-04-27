@@ -38,3 +38,7 @@ export const isValidSession = () => {
     global.localStorage.clear();
   }
 }
+
+export const isValidToken = () => {
+  //TODO: get API
+}

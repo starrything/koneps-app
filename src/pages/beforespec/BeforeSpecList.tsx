@@ -2,12 +2,12 @@ import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import axiosConfig from "@utils/axiosConfig";
+import { Container, Box, Breadcrumbs, Link, Typography } from "@mui/material";
 import { AgGridReact, AgGridColumn } from "ag-grid-react";
 import { ColDef, CellClickedEvent } from "ag-grid-community";
 import ActionRenderer1 from "@pages/beforespec/BeforeSpecActionRenderer1";
 import ActionRenderer2 from "@pages/beforespec/BeforeSpecActionRenderer2";
 import { currencyFormatter } from "@src/utils/formatter";
-import { Container, Box, Breadcrumbs, Link, Typography } from "@mui/material";
 
 const gridOptions = {
   // PROPERTIES
@@ -18,7 +18,7 @@ const gridOptions = {
 };
 
 const columnDefs: ColDef[] = [
-  { headerName: "공개일시", field: "rcptDt", sortable: true },
+  { headerName: "공개일시", field: "rcptDt", sortable: true, },
   {
     headerName: "등록번호",
     field: "bfSpecRgstNo",
@@ -29,6 +29,7 @@ const columnDefs: ColDef[] = [
     headerName: "품명(사업명)",
     field: "prdctClsfcNoNm",
     width: 400,
+    cellStyle: {textAlign: 'left'},
     sortable: true,
   },
   {
@@ -40,7 +41,7 @@ const columnDefs: ColDef[] = [
     sortable: true,
   },
   { headerName: "의견등록 마감일시", field: "opninRgstClseDt", sortable: true },
-  { headerName: "수요기관명", field: "rlDminsttNm", sortable: true },
+  { headerName: "수요기관명", field: "rlDminsttNm", cellStyle: {textAlign: 'left'}, sortable: true },
   { headerName: "납품기한일시", field: "dlvrTmlmtDt", sortable: true },
   { headerName: "납품일수", field: "dlvrDaynum", width: 150, sortable: true },
   { headerName: "규격문서1", field: "specDocFileUrl1", width: 120, sortable: true, cellRenderer: "ActionRenderer1" },
@@ -101,6 +102,12 @@ const BeforeSpec = (props: any) => {
       });
   };
 
+  const handleKeyPress = (event: any) => {
+    if (event.key === "Enter") {
+      searchBeforeSpecList();
+    }
+  };
+
   return (
     <Box sx={{ pt: 8.5 }}>
       <nav
@@ -142,6 +149,7 @@ const BeforeSpec = (props: any) => {
                 onChange={(e) => {
                   setSearchKeyword(e.target.value);
                 }}
+                onKeyDown={handleKeyPress}
               />
               <button
                 className="btn btn-outline-secondary"
